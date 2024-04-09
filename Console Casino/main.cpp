@@ -45,6 +45,7 @@ int main(int argc, char** argv)
                     bool dealerSoftDealt = false;
                     bool playerStand = false;
                     bool dealerStand = false;
+                    bool playerGotBlackjack = false;
                     // Get initial bet
                     showChips(playerChips);
                     int playerBet = getPlayerBet(playerChips);
@@ -56,9 +57,10 @@ int main(int argc, char** argv)
                         playerScore += currentCard;
                         playerSoft = blackjackSoftCheck(currentCard, playerSoftDealt, playerScore);
                     }
+                    playerScore = 21;
                     if (playerScore == 21)
                     {
-                        playerChips += (playerBet * 1.5);
+                        playerGotBlackjack = true;
                     }
                     cout << "Current Score: " << playerScore << endl;
                     dealerScore += blackjackNewCard(dealerScore);
@@ -133,7 +135,12 @@ int main(int argc, char** argv)
                     }
                     if (dealerStand)
                     {
-                        if (playerScore > 21)
+                        if(playerGotBlackjack)
+                        {
+                            cout << "Blackjack!" << endl;
+                            playerChips+=(playerBet * 1.5);
+                        }
+                        else if (playerScore > 21)
                         {
                             cout << "Player busts" << endl;
                         } 
