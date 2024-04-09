@@ -1,7 +1,6 @@
 #include <cstdlib> // Core library. Do not remove.
 #include <iostream> // For the I/O needed for all the games
 #include <ctime> // For the RNG
-#include <iomanip> // Used to format the Roulette Table
 
 using namespace std;
 int getPlayerBet(int& playerChips);
@@ -46,6 +45,7 @@ int main(int argc, char** argv)
                     bool dealerSoftDealt = false;
                     bool playerStand = false;
                     bool dealerStand = false;
+                    bool playerGotBlackjack = false;
                     // Get initial bet
                     showChips(playerChips);
                     int playerBet = getPlayerBet(playerChips);
@@ -57,6 +57,10 @@ int main(int argc, char** argv)
                         playerScore += currentCard;
                         playerSoft = blackjackSoftCheck(currentCard, playerSoftDealt, playerScore);
                     }
+                    playerScore = 21;
+                    if (playerScore == 21)
+                    {
+                        playerGotBlackjack = true;
                     if (playerScore == 21)
                     {
                         cout << "Blackjack! " << endl;
@@ -104,7 +108,10 @@ int main(int argc, char** argv)
                         {
                             cout << "Soft " << playerSoft << endl;
                         }
-
+                        else
+                        {
+                            playerSoft = 0;
+                        }
                         cout << "Current Score: " << playerScore << endl;
                     }
                     if (playerSoft > playerScore)
@@ -134,6 +141,30 @@ int main(int argc, char** argv)
                     }
                     if (dealerStand)
                     {
+                        if(playerGotBlackjack)
+                        {
+                            cout << "Blackjack!" << endl;
+                            playerChips+=(playerBet * 1.5);
+                        }
+                        else if (playerScore > 21)
+                        {
+                            cout << "Player busts" << endl;
+                        } 
+                        else if (dealerScore > 21)
+                        {
+                            cout << "Dealer busts" << endl;
+                            playerChips += (playerBet * 2);
+                        } 
+                        else if (dealerScore > playerScore)
+                        {
+                            cout << "Dealer wins" << endl;
+                        } 
+                        else if (playerScore > dealerScore)
+                        {
+                            cout << "Player wins" << endl;
+                            playerChips += (playerBet * 2);
+                        } 
+                        else
                         if (playerScore > 21)
                         {
                             cout << "Player busts" << endl;
@@ -173,6 +204,7 @@ int main(int argc, char** argv)
                     const int SIZE_OF_HAND = 5;
                     int winID = 0;
                     
+                    showChips(playerChips);
                     playerBet = getPlayerBet(playerChips);
                     clearConsole();
                     
@@ -233,7 +265,7 @@ int main(int argc, char** argv)
                     cout << "Would you like to play again? Y/N: ";
                     cin >> userInput;
                     clearConsole();
-                }while(tolower(userInput[0]) == 'y');
+                }while(tolower(userInput[0]) == 'y' && playerChips > 0);
                 break;
             }
         }
@@ -253,8 +285,15 @@ int getPlayerBet(int& playerChips)
     cout << "Enter an amount to bet: ";
     int playerBet;
     cin >> playerBet;
-    playerChips-=playerBet;
-    return playerBet;
+    if(playerBet <= playerChips)
+    {
+        playerChips-=playerBet;
+        return playerBet;
+    }
+    else
+    {
+        getPlayerBet(playerChips);
+    }
 }
 int blackjackSoftCheck(int card, bool softCheck, int softScore)
 {
