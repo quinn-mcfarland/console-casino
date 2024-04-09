@@ -59,7 +59,6 @@ int main(int argc, char** argv)
                     if (playerScore == 21)
                     {
                         playerChips += (playerBet * 1.5);
-                        playerStand = true;
                     }
                     cout << "Current Score: " << playerScore << endl;
                     dealerScore += blackjackNewCard(dealerScore);
@@ -101,7 +100,10 @@ int main(int argc, char** argv)
                         {
                             cout << "Soft " << playerSoft << endl;
                         }
-
+                        else
+                        {
+                            playerSoft = 0;
+                        }
                         cout << "Current Score: " << playerScore << endl;
                     }
                     if (playerSoft > playerScore)
@@ -134,18 +136,22 @@ int main(int argc, char** argv)
                         if (playerScore > 21)
                         {
                             cout << "Player busts" << endl;
-                        } else if (dealerScore > 21)
+                        } 
+                        else if (dealerScore > 21)
                         {
                             cout << "Dealer busts" << endl;
                             playerChips += (playerBet * 2);
-                        } else if (dealerScore > playerScore)
+                        } 
+                        else if (dealerScore > playerScore)
                         {
                             cout << "Dealer wins" << endl;
-                        } else if (playerScore > dealerScore)
+                        } 
+                        else if (playerScore > dealerScore)
                         {
                             cout << "Player wins" << endl;
                             playerChips += (playerBet * 2);
-                        } else
+                        } 
+                        else
                         {
                             cout << "Push. Nobody wins" << endl;
                             playerChips += playerBet;
@@ -251,8 +257,11 @@ int getPlayerBet(int& playerChips)
     cout << "Enter an amount to bet: ";
     int playerBet;
     cin >> playerBet;
-    playerChips-=playerBet;
-    return playerBet;
+    if(playerBet <= playerChips)
+    {
+        playerChips-=playerBet;
+        return playerBet;
+    }
 }
 int blackjackSoftCheck(int card, bool softCheck, int softScore)
 {
