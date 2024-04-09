@@ -262,6 +262,10 @@ int getPlayerBet(int& playerChips)
         playerChips-=playerBet;
         return playerBet;
     }
+    else
+    {
+        getPlayerBet(playerChips);
+    }
 }
 int blackjackSoftCheck(int card, bool softCheck, int softScore)
 {
