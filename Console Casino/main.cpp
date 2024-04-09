@@ -61,6 +61,12 @@ int main(int argc, char** argv)
                     if (playerScore == 21)
                     {
                         playerGotBlackjack = true;
+                    if (playerScore == 21)
+                    {
+                        cout << "Blackjack! " << endl;
+                        playerChips += (playerBet * 3.5);
+                        playerStand = true;
+                        dealerStand = true;
                     }
                     cout << "Current Score: " << playerScore << endl;
                     dealerScore += blackjackNewCard(dealerScore);
@@ -159,6 +165,21 @@ int main(int argc, char** argv)
                             playerChips += (playerBet * 2);
                         } 
                         else
+                        if (playerScore > 21)
+                        {
+                            cout << "Player busts" << endl;
+                        } else if (dealerScore > 21)
+                        {
+                            cout << "Dealer busts" << endl;
+                            playerChips += (playerBet * 2);
+                        } else if (dealerScore > playerScore)
+                        {
+                            cout << "Dealer wins" << endl;
+                        } else if (playerScore > dealerScore)
+                        {
+                            cout << "Player wins" << endl;
+                            playerChips += (playerBet * 2);
+                        } else
                         {
                             cout << "Push. Nobody wins" << endl;
                             playerChips += playerBet;
