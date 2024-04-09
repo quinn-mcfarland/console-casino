@@ -13,7 +13,7 @@ Blackjack is a game between the player and the dealer where each party tries to 
 The player will only see the dealer's first card. The player can "hit" adding a new card to their hand until they "stand" and are done playing. The dealer will then do the same. Aces in blackjack are different, they count as either 1 or 11 points. 
 The 11 points is known as a soft score. If you stand with a soft score higher than your hard score, and it is not over 21, your soft score will become your hard score.
 Table rules for blackjack are as follows:
-- Blackjack pays 1:1
+- Blackjack pays 3:2
 - Dealer must hit on Soft 17
 - No Insurance
 - No Splits
