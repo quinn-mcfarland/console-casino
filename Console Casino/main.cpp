@@ -3,7 +3,7 @@
 #include <ctime> // For the RNG
 
 using namespace std;
-int getPlayerBet(int& playerChips); // Gets bet for all games
+int getPlayerBet(int playerChips); // Gets bet for all games
 int blackjackSoftCheck(int card, bool softCheck, int softScore); // Delete
 int blackjackNewCard(int card); // Deals new card to active player.
 int* newPokerHand(int handSize);
@@ -19,7 +19,7 @@ int main(int argc, char** argv)
     int menu;
     srand(time(0)); // Seeds the RNG
     int playerChips = 100;
-    
+    int playerBet = 0;
     do
     {
         cout << "Current chips: $" << playerChips << endl;
@@ -48,7 +48,11 @@ int main(int argc, char** argv)
                     bool dealerStand = false;
                     // Get initial bet
                     showChips(playerChips);
-                    int playerBet = getPlayerBet(playerChips);
+                    do
+                    {
+                        playerBet = getPlayerBet(playerChips);
+                    } while (playerBet <= 0 || playerBet > playerChips);
+                    playerChips -= playerBet;
                     clearConsole();
                     // Do initial deal
                     for (int i = 0; i < 2; i++) // Deal player 2 cards
@@ -248,12 +252,11 @@ int main(int argc, char** argv)
     } while (tolower(userInput[0]) == 'y');
     return 0;
 }
-int getPlayerBet(int& playerChips)
+int getPlayerBet(int playerChips)
 {
     cout << "Enter an amount to bet: ";
     int playerBet;
     cin >> playerBet;
-    playerChips-=playerBet;
     return playerBet;
 }
 int blackjackSoftCheck(int card, bool softCheck, int softScore)
