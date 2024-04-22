@@ -1,4 +1,4 @@
-CONSOLE CASINO
+CONSOLE CASINO LITE v1.0
 
 DESCRIPTION:
 This application is a collection of casino games that will be played in a console window. This application was written entirely in C++ and is a continuous work in progress. Users are invited to download and play the games as much as they like.
