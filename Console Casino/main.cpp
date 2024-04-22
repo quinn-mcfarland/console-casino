@@ -177,7 +177,10 @@ int main(int argc, char** argv)
                     const int SIZE_OF_HAND = 5; // Hand size will never change in 5-card poker
                     int winID = 0; // Used to check if player won and how much.
                     
-                    playerBet = getPlayerBet(playerChips);
+                    do
+                    {
+                        playerBet = getPlayerBet(playerChips);
+                    }while (playerBet <= 0 || playerBet > playerChips);
                     clearConsole();
                     
                     showChips(playerChips);
