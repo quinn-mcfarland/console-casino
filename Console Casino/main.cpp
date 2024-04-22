@@ -1,7 +1,6 @@
 #include <cstdlib> // Core library. Do not remove.
 #include <iostream> // For the I/O needed for all the games
 #include <ctime> // For the RNG
-
 using namespace std;
 int getPlayerBet(int playerChips); // Gets bet for all games
 int blackjackSoftCheck(int card, bool softCheck, int softScore); // Delete
@@ -12,7 +11,6 @@ void changeCardsInHand(int*& handArray);
 void clearConsole();
 void showChips(int playerChips);
 int pokerWinCheck(int* handArray, int handSize);
-
 int main(int argc, char** argv)
 {
     string userInput; // Variable for playing again
@@ -32,7 +30,7 @@ int main(int argc, char** argv)
         switch (menu)
         {
             case 1:
-            {
+
                 clearConsole();
                 do
                 {
@@ -71,12 +69,9 @@ int main(int argc, char** argv)
                     cout << "Current Score: " << playerScore << endl;
                     dealerScore += blackjackNewCard(dealerScore);
                     dealerSoft = blackjackSoftCheck(currentCard, dealerSoftDealt, dealerScore);
-
                     cout << "Against Dealer's " << dealerScore << endl; // Only dealers first card is visible
-
                     dealerScore += blackjackNewCard(dealerScore);
                     dealerSoftDealt = blackjackSoftCheck(currentCard, dealerSoftDealt, dealerScore);
-
                     while (!playerStand && playerScore < 21)
                     {
                         int play;
@@ -87,35 +82,28 @@ int main(int argc, char** argv)
                         switch (play)
                         {
                             case 1:
-                            {
                                 currentCard = blackjackNewCard(currentCard);
                                 playerScore += currentCard;
                                 playerSoft = blackjackSoftCheck(currentCard, playerSoftDealt, playerScore);
                                 break;
-                            }
                             case 2:
-                            {
                                 playerStand = true;
                                 break;
-                            }
                             default:
-                            {
                                 cout << "Invalid input." << endl;
-                            }
                         }
                         clearConsole();
                         if (playerSoft <= 21 && playerSoft > 0)// Will output user's soft score if it exists and won't result in a bust
                         {
                             cout << "Soft " << playerSoft << endl;
                         }
-
                         cout << "Current Score: " << playerScore << endl;
                     }
                     if (playerSoft > playerScore)
                     {
                         playerScore = playerSoft;
                     }
-                    if (playerScore >= 21)
+                    if (playerScore >= 21) // Remove. This isn't how blackjack is played.
                     {
                         dealerStand = true;
                     }
@@ -126,7 +114,8 @@ int main(int argc, char** argv)
                             currentCard = blackjackNewCard(currentCard);
                             dealerScore += currentCard;
                             dealerSoft = blackjackSoftCheck(currentCard, dealerSoftDealt, dealerScore);
-                        } else
+                        }
+                        else
                         {
                             dealerStand = true;
                         }
@@ -141,18 +130,22 @@ int main(int argc, char** argv)
                         if (playerScore > 21)
                         {
                             cout << "Player busts" << endl;
-                        } else if (dealerScore > 21)
+                        }
+                        else if (dealerScore > 21)
                         {
                             cout << "Dealer busts" << endl;
                             playerChips += (playerBet * 2);
-                        } else if (dealerScore > playerScore)
+                        }
+                        else if (dealerScore > playerScore)
                         {
                             cout << "Dealer wins" << endl;
-                        } else if (playerScore > dealerScore)
+                        }
+                        else if (playerScore > dealerScore)
                         {
                             cout << "Player wins" << endl;
                             playerChips += (playerBet * 2);
-                        } else
+                        }
+                        else
                         {
                             cout << "Push. Nobody wins" << endl;
                             playerChips += playerBet;
@@ -161,39 +154,33 @@ int main(int argc, char** argv)
                     cout << "Player: " << playerScore << endl
                             << "Dealer: " << dealerScore << endl;
                     showChips(playerChips);
-                    
+
                     cout << "Would you like to play again? Y/N: ";
                     cin >> userInput;
                     clearConsole();
                 } while (tolower(userInput[0]) == 'y' && playerChips > 0);
                 break;
-            }
             case 2:
-            {
+                clearConsole();
                 do
                 {
                     int pokerMenu;
                     int playerBet = 0;
                     const int SIZE_OF_HAND = 5; // Hand size will never change in 5-card poker
                     int winID = 0; // Used to check if player won and how much.
-                    
                     do
                     {
                         playerBet = getPlayerBet(playerChips);
-                    }while (playerBet <= 0 || playerBet > playerChips);
+                    } while (playerBet <= 0 || playerBet > playerChips);
                     clearConsole();
-                    
                     showChips(playerChips);
                     int* playerHand;
                     playerHand = newPokerHand(SIZE_OF_HAND);
                     outputPokerHand(playerHand, SIZE_OF_HAND);
-                    
                     cout << "1) Switch" << endl;
                     cout << "2) Keep" << endl;
-                    
                     cout << "Please make a selection: ";
                     cin >> pokerMenu;
-                    
                     switch (pokerMenu)
                     {
                         case 1:
@@ -207,30 +194,30 @@ int main(int argc, char** argv)
                     clearConsole();
                     winID = pokerWinCheck(playerHand, SIZE_OF_HAND);
                     outputPokerHand(playerHand, SIZE_OF_HAND);
-                    if(winID == 5) // 4-of-a-kind
+                    if (winID == 5) // 4-of-a-kind
                     {
                         cout << "4 of a kind!" << endl;
-                        playerChips+=playerBet * 6;
+                        playerChips += playerBet * 6;
                     }
-                    else if(winID == 4) // Full House
+                    else if (winID == 4) // Full House
                     {
                         cout << "Full House!" << endl;
-                        playerChips+=playerBet * 5;
+                        playerChips += playerBet * 5;
                     }
-                    else if(winID == 3) // 3 of a kind
+                    else if (winID == 3) // 3 of a kind
                     {
                         cout << "3 of a kind!" << endl;
-                        playerChips+=playerBet * 4;
+                        playerChips += playerBet * 4;
                     }
-                    else if(winID == 2)
+                    else if (winID == 2)
                     {
                         cout << "Two Pair!" << endl;
-                        playerChips+=playerBet * 3;
+                        playerChips += playerBet * 3;
                     }
-                    else if(winID == 1)
+                    else if (winID == 1)
                     {
                         cout << "Pair!" << endl;
-                        playerChips+=playerBet * 2;
+                        playerChips += playerBet * 2;
                     }
                     else
                     {
@@ -240,9 +227,10 @@ int main(int argc, char** argv)
                     cout << "Would you like to play again? Y/N: ";
                     cin >> userInput;
                     clearConsole();
-                }while(tolower(userInput[0]) == 'y');
+                } while (tolower(userInput[0]) == 'y');
                 break;
-            }
+            default:
+                cout << "Input not valid. Please try again." << endl;
         }
         if (playerChips == 0)
         {
@@ -313,7 +301,7 @@ void clearConsole()
     {
         cout << "\n\n\n\n\n\n\n\n\n\n";
     }
-    
+
 }
 void showChips(int playerChips)
 {
@@ -332,29 +320,29 @@ int pokerWinCheck(int* handArray, int handSize)
     }
     for (int i = 0; i < handSize; i++)
     {
-        if(check[i] == 1)
+        if (check[i] == 1)
         {
             continue;
         }
         int count = 1;
         for (int j = i + 1; j < handSize; j++)
         {
-            if(handArray[i] == handArray[j])
+            if (handArray[i] == handArray[j])
             {
                 check[j] = 1;
                 count++;
             }
         }
-        if(count == 4)
+        if (count == 4)
         {
             winID = 5;
         }
-        else if(count == 3)
+        else if (count == 3)
         {
             fullHouseCheck++;
             winID = 3;
         }
-        else if(count == 2)
+        else if (count == 2)
         {
             twoPairCheck++;
             fullHouseCheck++;
