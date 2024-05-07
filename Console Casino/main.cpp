@@ -1,13 +1,23 @@
 #include <cstdlib> // Core library. Do not remove.
 #include <iostream> // For the I/O needed for all the games
 #include <ctime> // For the RNG
+<<<<<<< Updated upstream:Console Casino/main.cpp
 using namespace std;
 int getPlayerBet(int playerChips); // Gets bet for all games
 int blackjackSoftCheck(int card, bool softCheck, int softScore); // Delete
 int blackjackNewCard(int card); // Deals new card to active player.
+=======
+
+// Function Prototypes
+int getPlayerBet(int playerChips);
+int blackjackSoftCheck(int card, bool softCheck, int softScore);
+int blackjackNewCard(int card);
+int playBlackjack(int playerChips, int playerBet);
+>>>>>>> Stashed changes:Development Files/Console Casino/main.cpp
 int* newPokerHand(int handSize);
 void outputPokerHand(int* handArray, int handSize);
 void changeCardsInHand(int*& handArray);
+int playFiveCardPoker(int playerChips, int playerBet);
 void clearConsole();
 void showChips(int playerChips);
 int pokerWinCheck(int* handArray, int handSize);
@@ -16,20 +26,34 @@ int main(int argc, char** argv)
     string userInput; // Variable for playing again
     int menu;
     srand(time(0)); // Seeds the RNG
+<<<<<<< Updated upstream:Console Casino/main.cpp
     int playerChips = 100;
     int playerBet = 0;
+=======
+    
+    int playerChips = 100; // Player's money
+    int playerBet = 1; // Global variable for player bet
+    
+>>>>>>> Stashed changes:Development Files/Console Casino/main.cpp
     do
     {
         cout << "Current chips: $" << playerChips << endl;
 
+<<<<<<< Updated upstream:Console Casino/main.cpp
         cout << "1) Blackjack" << endl;
         cout << "2) 5-Card Poker" << endl;
+=======
+        std::cout << "1) Blackjack" << std::endl;
+        std::cout << "2) 5-Card Poker" << std::endl;
+        std::cout << "3) Exit" << std::endl;
+>>>>>>> Stashed changes:Development Files/Console Casino/main.cpp
 
         cout << "Please make a selection: " << flush;
         cin >> menu;
         switch (menu)
         {
             case 1:
+<<<<<<< Updated upstream:Console Casino/main.cpp
 
                 clearConsole();
                 do
@@ -159,13 +183,18 @@ int main(int argc, char** argv)
                     cin >> userInput;
                     clearConsole();
                 } while (tolower(userInput[0]) == 'y' && playerChips > 0);
+=======
+            {
+                playBlackjack(playerChips, playerBet);
+>>>>>>> Stashed changes:Development Files/Console Casino/main.cpp
                 break;
+            }
             case 2:
                 clearConsole();
                 do
                 {
                     int pokerMenu;
-                    int playerBet = 0;
+                    int playerBet;
                     const int SIZE_OF_HAND = 5; // Hand size will never change in 5-card poker
                     int winID = 0; // Used to check if player won and how much.
                     do
@@ -224,11 +253,18 @@ int main(int argc, char** argv)
                         cout << "You lose" << endl;
                     }
                     showChips(playerChips);
+<<<<<<< Updated upstream:Console Casino/main.cpp
                     cout << "Would you like to play again? Y/N: ";
                     cin >> userInput;
+=======
+>>>>>>> Stashed changes:Development Files/Console Casino/main.cpp
                     clearConsole();
-                } while (tolower(userInput[0]) == 'y');
+                } while (playerBet > 0 && playerChips > 0);
                 break;
+            case 3:
+            {
+                return 0;
+            }
             default:
                 cout << "Input not valid. Please try again." << endl;
         }
@@ -237,20 +273,38 @@ int main(int argc, char** argv)
             cout << "Game Over. You ran out of money." << endl;
             return 0;
         }
+<<<<<<< Updated upstream:Console Casino/main.cpp
         cout << "Would you like to play another game? Y/N: ";
         cin >> userInput;
+=======
+>>>>>>> Stashed changes:Development Files/Console Casino/main.cpp
         clearConsole();
-    } while (tolower(userInput[0]) == 'y');
-    return 0;
+    } while (menu != 3);
 }
 int getPlayerBet(int playerChips)
 {
+<<<<<<< Updated upstream:Console Casino/main.cpp
     cout << "Enter an amount to bet: ";
+=======
+    std::cout << "Enter an amount to bet (Bet 0 to exit): ";
+>>>>>>> Stashed changes:Development Files/Console Casino/main.cpp
     int playerBet;
     cin >> playerBet;
     return playerBet;
 }
+<<<<<<< Updated upstream:Console Casino/main.cpp
 int blackjackSoftCheck(int card, bool softCheck, int softScore)
+=======
+
+/**
+ * Used to check if an ace was dealt during blackjack.
+ * @param card - Current card being checked.
+ * @param softCheck - Boolean dependent on if <card> is an ace or not.
+ * @param softScore - The score used if an ace is dealt
+ * @return - The new soft score.
+ */
+int blackjackSoftCheck(int card, bool softCheck, int softScore) //Please delete (Issue #18) 
+>>>>>>> Stashed changes:Development Files/Console Casino/main.cpp
 {
     if (card == 1)
     {
@@ -264,6 +318,148 @@ int blackjackNewCard(int card)
     card = rand() % 10 + 1; // Should only generate numbers between 1 and 10.
     return card;
 }
+<<<<<<< Updated upstream:Console Casino/main.cpp
+=======
+
+int playBlackjack(int playerChips, int playerBet)
+{
+    while (playerBet != 0)
+    {
+        clearConsole();
+        int playerScore = 0; // Used for scoring
+        int dealerScore = 0;
+        int playerSoft = 0; // Alternate scores when ace is dealt.
+        int dealerSoft = 0;
+        int currentCard = 0; // Newest card in play. Used for soft scoring
+
+        // Following variables should be made obsolete and deleted (Issue #18)
+        bool playerSoftDealt = false;
+        bool dealerSoftDealt = false;
+        bool playerStand = false;
+        bool dealerStand = false;
+
+        // Get initial bet
+        showChips(playerChips);
+        playerBet = getPlayerBet(playerChips);
+        if (playerBet == 0)
+        {
+            return 0;
+        }
+        playerChips -= playerBet;
+        clearConsole();
+
+        // Do initial deal
+        showChips(playerChips);
+        for (int i = 0; i < 2; i++) // Deal player 2 cards
+        {
+            currentCard = blackjackNewCard(currentCard);
+            playerScore += currentCard;
+            playerSoft = blackjackSoftCheck(currentCard, playerSoftDealt, playerScore);
+        }
+        if (playerScore == 21) // Improperly Scores (Issue #16)
+        {
+            std::cout << "Blackjack! " << std::endl;
+            playerChips += (playerBet * 3.5);
+            playerStand = true;
+            dealerStand = true;
+        }
+        std::cout << "Current Score: " << playerScore << std::endl;
+        dealerScore += blackjackNewCard(dealerScore);
+        dealerSoft = blackjackSoftCheck(currentCard, dealerSoftDealt, dealerScore);
+        std::cout << "Against Dealer's " << dealerScore << std::endl; // Only dealers first card is visible
+        dealerScore += blackjackNewCard(dealerScore);
+        dealerSoftDealt = blackjackSoftCheck(currentCard, dealerSoftDealt, dealerScore);
+        while (!playerStand && playerScore < 21)
+        {
+            int play;
+            std::cout << "1) Hit" << std::endl;
+            std::cout << "2) Stand" << std::endl;
+            std::cout << "Please make a selection: ";
+            std::cin >> play;
+            switch (play)
+            {
+                case 1:
+                    currentCard = blackjackNewCard(currentCard);
+                    playerScore += currentCard;
+                    playerSoft = blackjackSoftCheck(currentCard, playerSoftDealt, playerScore);
+                    break;
+                case 2:
+                    playerStand = true;
+                    break;
+                default:
+                    std::cout << "Invalid input." << std::endl;
+            }
+            clearConsole();
+            if (playerSoft <= 21 && playerSoft > 0)// Will output user's soft score if it exists and won't result in a bust
+            {
+                std::cout << "Soft " << playerSoft << std::endl;
+            }
+            std::cout << "Current Score: " << playerScore << std::endl;
+        }
+        if (playerSoft > playerScore)
+        {
+            playerScore = playerSoft;
+        }
+        if (playerScore >= 21) // Remove. This isn't how blackjack is played.
+        {
+            dealerStand = true;
+        }
+        while (playerStand && !dealerStand)
+        {
+            if (dealerScore < 18 && dealerSoft < 18)
+            {
+                currentCard = blackjackNewCard(currentCard);
+                dealerScore += currentCard;
+                dealerSoft = blackjackSoftCheck(currentCard, dealerSoftDealt, dealerScore);
+            }
+            else
+            {
+                dealerStand = true;
+            }
+        }
+        clearConsole();
+        if (dealerSoft > dealerScore)
+        {
+            dealerScore = dealerSoft;
+        }
+        if (dealerStand)
+        {
+            if (playerScore > 21)
+            {
+                std::cout << "Player busts" << std::endl;
+            }
+            else if (dealerScore > 21)
+            {
+                std::cout << "Dealer busts" << std::endl;
+                playerChips += (playerBet * 2);
+            }
+            else if (dealerScore > playerScore)
+            {
+                std::cout << "Dealer wins" << std::endl;
+            }
+            else if (playerScore > dealerScore)
+            {
+                std::cout << "Player wins" << std::endl;
+                playerChips += (playerBet * 2);
+            }
+            else
+            {
+                std::cout << "Push. Nobody wins" << std::endl;
+                playerChips += playerBet;
+            }
+        }
+        std::cout << "Player: " << playerScore << std::endl
+                << "Dealer: " << dealerScore << std::endl;
+        showChips(playerChips);
+    }
+}
+
+/**
+ * Generates a new hand for active players during 5 card poker.
+ * @param handSize - size of the hand. Should be a constant.
+ * @return - The entire hand array after generation.
+ */
+>>>>>>> Stashed changes:Development Files/Console Casino/main.cpp
 int* newPokerHand(int handSize)
 {
     static int handArray[5];
@@ -295,6 +491,18 @@ void changeCardsInHand(int*& handArray)
         handArray[currentCard - 1] = rand() % 10 + 1;
     }
 }
+<<<<<<< Updated upstream:Console Casino/main.cpp
+=======
+
+int playFiveCardPoker(int playerChips, int playerBet)
+{
+    
+}
+
+/**
+ * Clears the console
+ */
+>>>>>>> Stashed changes:Development Files/Console Casino/main.cpp
 void clearConsole()
 {
     for (int i = 0; i < 10; i++)
