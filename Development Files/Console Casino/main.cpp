@@ -1,34 +1,26 @@
 #include <cstdlib> // Core library. Do not remove.
 #include <iostream> // For the I/O needed for all the games
 #include <ctime> // For the RNG
-
 // Function Prototypes
 int getPlayerBet(int playerChips);
 void clearConsole();
 void showChips(int playerChips);
-int blackjackSoftCheck(int card, bool softCheck, int softScore); // Delete (Issue #18)
-int blackjackNewCard(int card);
+int generateNewCard();
 int* newPokerHand(int handSize);
 void outputPokerHand(int* handArray, int handSize);
 void changeCardsInHand(int*& handArray);
 int pokerWinCheck(int* handArray, int handSize);
-
 int main(int argc, char** argv)
 {
     std::string userInput;
     int menu; // Main menu variable
     srand(time(0)); // Seeds the RNG
-
     int playerChips = 100; // Player's money
     int playerBet = 0; // Global variable for player bet
-
-
     showChips(playerChips);
-
     std::cout << "1) Blackjack" << std::endl;
     std::cout << "2) 5-Card Poker" << std::endl;
     std::cout << "3) Exit" << std::endl;
-
     std::cout << "Please make a selection: ";
     std::cin >> menu;
     switch (menu)
@@ -42,15 +34,11 @@ int main(int argc, char** argv)
                 int dealerScore = 0;
                 int playerSoft = 0; // Alternate scores when ace is dealt.
                 int dealerSoft = 0;
-                int currentCard = 0; // Newest card in play. Used for soft scoring
-
-                // Following variables should be made obsolete and deleted (Issue #18)
-                bool playerSoftDealt = false;
-                bool dealerSoftDealt = false;
+                int currentCard = 0;
                 bool playerStand = false;
                 bool dealerStand = false;
-
-                // Get initial bet
+                bool playerHasBlackjack = false;
+                // Get bets
                 showChips(playerChips);
                 do
                 {
@@ -58,30 +46,46 @@ int main(int argc, char** argv)
                 } while (playerBet <= 0 || playerBet > playerChips);
                 playerChips -= playerBet;
                 clearConsole();
-
                 // Do initial deal
                 showChips(playerChips);
                 for (int i = 0; i < 2; i++) // Deal player 2 cards
                 {
-                    currentCard = blackjackNewCard(currentCard);
+                    currentCard = generateNewCard();
                     playerScore += currentCard;
-                    playerSoft = blackjackSoftCheck(currentCard, playerSoftDealt, playerScore);
+                    if((currentCard == 1 && !playerStand) || (playerSoft > 0 && playerSoft < 21))
+                    {
+                        playerSoft = playerScore + 10;
+                    }
                 }
                 if (playerScore == 21) // Improperly Scores (Issue #16)
                 {
-                    std::cout << "Blackjack! " << std::endl;
-                    playerChips += (playerBet * 3.5);
                     playerStand = true;
-                    dealerStand = true;
+                    playerHasBlackjack = true;
                 }
-                std::cout << "Current Score: " << playerScore << std::endl;
-                dealerScore += blackjackNewCard(dealerScore);
-                dealerSoft = blackjackSoftCheck(currentCard, dealerSoftDealt, dealerScore);
-                std::cout << "Against Dealer's " << dealerScore << std::endl; // Only dealers first card is visible
-                dealerScore += blackjackNewCard(dealerScore);
-                dealerSoftDealt = blackjackSoftCheck(currentCard, dealerSoftDealt, dealerScore);
+                dealerScore += generateNewCard();
+                if(dealerScore == 1)
+                {
+                    dealerSoft = dealerScore + 10;
+                }
                 while (!playerStand && playerScore < 21)
                 {
+                    
+                    if (playerSoft <= 21 && playerSoft > 0)// Will output user's soft score if it exists and won't result in a bust
+                    {
+                        std::cout << "You have " << playerScore << "/" << playerSoft << std::endl;
+                    }
+                    else
+                    {
+                        std::cout << "You have " << playerScore << std::endl;
+                    }
+                    if (dealerScore == 1 || dealerSoft > 0)
+                    {
+                        std::cout << "Dealer has" << dealerScore << "/" << dealerSoft << std::endl;
+                    }
+                    else
+                    {
+                        std::cout << "Dealer has " << dealerScore << std::endl;
+                    }
                     int play;
                     std::cout << "1) Hit" << std::endl;
                     std::cout << "2) Stand" << std::endl;
@@ -90,9 +94,8 @@ int main(int argc, char** argv)
                     switch (play)
                     {
                         case 1:
-                            currentCard = blackjackNewCard(currentCard);
+                            currentCard = generateNewCard();
                             playerScore += currentCard;
-                            playerSoft = blackjackSoftCheck(currentCard, playerSoftDealt, playerScore);
                             break;
                         case 2:
                             playerStand = true;
@@ -100,28 +103,30 @@ int main(int argc, char** argv)
                         default:
                             std::cout << "Invalid input." << std::endl;
                     }
-                    clearConsole();
-                    if (playerSoft <= 21 && playerSoft > 0)// Will output user's soft score if it exists and won't result in a bust
+                    if((currentCard == 1 && !playerStand) || (playerSoft > 0 && playerSoft < 21))
                     {
-                        std::cout << "Soft " << playerSoft << std::endl;
+                        playerSoft = playerScore + 10;
                     }
-                    std::cout << "Current Score: " << playerScore << std::endl;
+                    clearConsole();
                 }
                 if (playerSoft > playerScore)
                 {
                     playerScore = playerSoft;
                 }
-                if (playerScore >= 21) // Remove. This isn't how blackjack is played.
+                if (playerScore > 21)
                 {
                     dealerStand = true;
                 }
                 while (playerStand && !dealerStand)
                 {
-                    if (dealerScore < 18 && dealerSoft < 18)
+                    if (dealerScore < 18 && dealerSoft <= 17)
                     {
-                        currentCard = blackjackNewCard(currentCard);
+                        currentCard = generateNewCard();
                         dealerScore += currentCard;
-                        dealerSoft = blackjackSoftCheck(currentCard, dealerSoftDealt, dealerScore);
+                        if((currentCard == 1 && !dealerStand) || (dealerSoft > 0 && dealerSoft < 21))
+                        {
+                            dealerSoft = dealerScore + 10;
+                        }
                     }
                     else
                     {
@@ -133,31 +138,33 @@ int main(int argc, char** argv)
                 {
                     dealerScore = dealerSoft;
                 }
-                if (dealerStand)
+                if (playerHasBlackjack && playerScore > dealerScore)
                 {
-                    if (playerScore > 21)
-                    {
-                        std::cout << "Player busts" << std::endl;
-                    }
-                    else if (dealerScore > 21)
-                    {
-                        std::cout << "Dealer busts" << std::endl;
-                        playerChips += (playerBet * 2);
-                    }
-                    else if (dealerScore > playerScore)
-                    {
-                        std::cout << "Dealer wins" << std::endl;
-                    }
-                    else if (playerScore > dealerScore)
-                    {
-                        std::cout << "Player wins" << std::endl;
-                        playerChips += (playerBet * 2);
-                    }
-                    else
-                    {
-                        std::cout << "Push. Nobody wins" << std::endl;
-                        playerChips += playerBet;
-                    }
+                    std::cout << "Blackjack!" << std::endl;
+                    playerChips += (playerBet * 3.5);
+                }
+                else if (playerScore > 21)
+                {
+                    std::cout << "Player busts" << std::endl;
+                }
+                else if (dealerScore > 21)
+                {
+                    std::cout << "Dealer busts" << std::endl;
+                    playerChips += (playerBet * 2);
+                }
+                else if (dealerScore > playerScore)
+                {
+                    std::cout << "Dealer wins" << std::endl;
+                }
+                else if (playerScore > dealerScore)
+                {
+                    std::cout << "Player wins" << std::endl;
+                    playerChips += (playerBet * 2);
+                }
+                else
+                {
+                    std::cout << "Push. Nobody wins" << std::endl;
+                    playerChips += playerBet;
                 }
                 std::cout << "Player: " << playerScore << std::endl
                         << "Dealer: " << dealerScore << std::endl;
@@ -248,7 +255,6 @@ int main(int argc, char** argv)
     }
     return 0;
 }
-
     /**
      * Gets players bet when invoked.
      * @param playerChips - The current amount of money the player has.
@@ -261,7 +267,6 @@ int main(int argc, char** argv)
         std::cin >> playerBet;
         return playerBet;
     }
-
     /**
      * Clears the console
      */
@@ -273,7 +278,6 @@ int main(int argc, char** argv)
         }
 
     }
-
     /**
      * Outputs amount of money player has.
      * @param playerChips - The current amount of money the player has.
@@ -282,40 +286,16 @@ int main(int argc, char** argv)
     {
         std::cout << "You have $" << playerChips << std::endl;
     }
-
-    /**
-     * Used to check if an ace was dealt during blackjack. Function currently marked for deletion.
-     * @param card - Current card being checked.
-     * @param softCheck - Boolean dependent on if <card> is an ace or not.
-     * @param softScore - The score used if an ace is dealt
-     * @return - The new soft score.
-     */
-    int blackjackSoftCheck(int card, bool softCheck, int softScore)
-    {
-        if (card == 1)
-        {
-            softCheck = true;
-            return softScore + 10; // Calculation required for soft scoring
-        }
-        return softScore * 0;
-    }
-
-    /**
-     * Deals a new card to the active player during blackjack.
-     * @param card - the current card being dealt
-     * @return - point value of the current card.
-     */
-    int blackjackNewCard(int card)
-    {
-        card = rand() % 10 + 1; // Should only generate numbers between 1 and 10.
-        return card;
-    }
-
     /**
      * Generates a new hand for active players during 5 card poker.
      * @param handSize - size of the hand. Should be a constant.
      * @return - The entire hand array after generation.
      */
+    int generateNewCard()
+    {
+        int card = rand() % 10 + 1;
+        return card;
+    }
     int* newPokerHand(int handSize)
     {
         static int handArray[5];
@@ -325,7 +305,6 @@ int main(int argc, char** argv)
         }
         return handArray;
     }
-
     /**
      * Outputs hand during 5-card poker.
      * @param handArray - The hand array
@@ -340,7 +319,6 @@ int main(int argc, char** argv)
         }
         std::cout << std::endl;
     }
-
     /**
      * The exchange system for 5 card Poker
      * @param handArray - The hand array
@@ -358,7 +336,6 @@ int main(int argc, char** argv)
             handArray[currentCard - 1] = rand() % 10 + 1;
         }
     }
-
     /**
      * Win check system for 5 card poker.
      * @param handArray - The hand array
