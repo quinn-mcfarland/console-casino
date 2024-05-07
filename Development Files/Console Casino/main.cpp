@@ -2,9 +2,9 @@
 #include <iostream> // For the I/O needed for all the games
 #include <ctime> // For the RNG
 
-int getPlayerBet(int playerChips); // Gets bet for all games
-int blackjackSoftCheck(int card, bool softCheck, int softScore); // Delete
-int blackjackNewCard(int card); // Deals new card to active player.
+int getPlayerBet(int playerChips);
+int blackjackSoftCheck(int card, bool softCheck, int softScore); // Delete (Issue #18)
+int blackjackNewCard(int card);
 int* newPokerHand(int handSize);
 void outputPokerHand(int* handArray, int handSize);
 void changeCardsInHand(int*& handArray);
@@ -15,12 +15,12 @@ int pokerWinCheck(int* handArray, int handSize);
 int main(int argc, char** argv)
 {
     std::string userInput; // Variable for playing again
-    int menu;
+    int menu; // Main menu variable
     
     srand(time(0)); // Seeds the RNG
     
     int playerChips = 100; // Player's money
-    int playerBet = 0;
+    int playerBet = 0; // Global variable for player bet
     
     do
     {
@@ -43,8 +43,7 @@ int main(int argc, char** argv)
                     int playerSoft = 0; // Alternate scores when ace is dealt.
                     int dealerSoft = 0;
                     int currentCard = 0; // Newest card in play. Used for soft scoring
-                    // All following booleans can/should be removed 
-                    bool playerSoftDealt = false; // Will turn true when a 1 (Ace) is dealt.
+                    // Following variables should be made obsolete and deleted (Issue #18)
                     bool dealerSoftDealt = false;
                     bool playerStand = false;
                     bool dealerStand = false;
@@ -63,7 +62,7 @@ int main(int argc, char** argv)
                         playerScore += currentCard;
                         playerSoft = blackjackSoftCheck(currentCard, playerSoftDealt, playerScore);
                     }
-                    if (playerScore == 21)
+                    if (playerScore == 21) // Improperly Scores (Issue #16)
                     {
                         std::cout << "Blackjack! " << std::endl;
                         playerChips += (playerBet * 3.5);
@@ -247,6 +246,12 @@ int main(int argc, char** argv)
     } while (tolower(userInput[0]) == 'y');
     return 0;
 }
+
+/**
+ * Gets players bet when invoked.
+ * @param playerChips - The current amount of money the player has.
+ * @return - The player's bet. Used for payouts later.
+ */
 int getPlayerBet(int playerChips)
 {
     std::cout << "Enter an amount to bet: ";
@@ -254,6 +259,14 @@ int getPlayerBet(int playerChips)
     std::cin >> playerBet;
     return playerBet;
 }
+
+/**
+ * Used to check if an ace was dealt during blackjack. Function currently marked for deletion.
+ * @param card - Current card being checked.
+ * @param softCheck - Boolean dependent on if <card> is an ace or not.
+ * @param softScore - The score used if an ace is dealt
+ * @return - The new soft score.
+ */
 int blackjackSoftCheck(int card, bool softCheck, int softScore)
 {
     if (card == 1)
@@ -263,11 +276,23 @@ int blackjackSoftCheck(int card, bool softCheck, int softScore)
     }
     return softScore * 0;
 }
+
+/**
+ * Deals a new card to the active player during blackjack.
+ * @param card - the current card being dealt
+ * @return - point value of the current card.
+ */
 int blackjackNewCard(int card)
 {
     card = rand() % 10 + 1; // Should only generate numbers between 1 and 10.
     return card;
 }
+
+/**
+ * Generates a new hand for active players during 5 card poker.
+ * @param handSize - size of the hand. Should be a constant.
+ * @return - The entire hand array after generation.
+ */
 int* newPokerHand(int handSize)
 {
     static int handArray[5];
@@ -277,6 +302,12 @@ int* newPokerHand(int handSize)
     }
     return handArray;
 }
+
+/**
+ * Outputs hand during 5-card poker.
+ * @param handArray - The hand array
+ * @param handSize - The size of the hand array
+ */
 void outputPokerHand(int* handArray, int handSize)
 {
     std::cout << "You have ";
@@ -286,11 +317,16 @@ void outputPokerHand(int* handArray, int handSize)
     }
     std::cout << std::endl;
 }
-void changeCardsInHand(int*& handArray) // Fix this (Issue #13)
+
+/**
+ * The exchange system for 5 card Poker
+ * @param handArray - The hand array
+ */
+void changeCardsInHand(int*& handArray) // Readability as a whole (Issue #14)
 {
     int cardsToChange;
     int currentCard;
-    std::cout << "Enter amount of cards to change (1 - 3): "; // Prompt better. Out of bounds possibility
+    std::cout << "Enter amount of cards to change (1 - 3): "; // Out of bounds possible (Issue #13)
     std::cin >> cardsToChange;
     for (int i = 0; i < cardsToChange; i++)
     {
@@ -299,6 +335,10 @@ void changeCardsInHand(int*& handArray) // Fix this (Issue #13)
         handArray[currentCard - 1] = rand() % 10 + 1;
     }
 }
+
+/**
+ * Clears the console
+ */
 void clearConsole()
 {
     for (int i = 0; i < 10; i++)
@@ -307,10 +347,22 @@ void clearConsole()
     }
 
 }
+
+/**
+ * Outputs amount of money player has.
+ * @param playerChips - The current amount of money the player has.
+ */
 void showChips(int playerChips)
 {
     std::cout << "You have $" << playerChips << std::endl;
 }
+
+/**
+ * Win check system for 5 card poker.
+ * @param handArray - The hand array
+ * @param handSize - The size of the hand
+ * @return - The ID number of a winning hand.
+ */
 int pokerWinCheck(int* handArray, int handSize) // Rework this (Issue #22)
 {
     int fullHouseCheck = 0;
