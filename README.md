@@ -30,7 +30,11 @@ Payouts for 5 card poker:
 - Pair: 1:1
 
 HOW TO INSTALL:
-Just download the .zip folder from and extract it to wherever you like and run the application.
+Download the Source code and run console_casino.exe in the Application Folder
 
 SYSTEM REQUIREMENTS:
-As of right now, this project is strictly Windows only. Any modern version will do.
+CPU: Any modern dual-core would do
+RAM: 1GB
+GPU: Enough to display a terminal window. This can achieve +60fps on onboard graphics easy.
+Storage: ~10MB
+OS: Windows 10+
