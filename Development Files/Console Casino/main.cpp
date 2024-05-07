@@ -2,6 +2,7 @@
 #include <iostream> // For the I/O needed for all the games
 #include <ctime> // For the RNG
 
+// Function Prototypes
 int getPlayerBet(int playerChips);
 int blackjackSoftCheck(int card, bool softCheck, int softScore); // Delete (Issue #18)
 int blackjackNewCard(int card);
@@ -44,6 +45,7 @@ int main(int argc, char** argv)
                     int dealerSoft = 0;
                     int currentCard = 0; // Newest card in play. Used for soft scoring
                     // Following variables should be made obsolete and deleted (Issue #18)
+                    bool playerSoftDealt = false;
                     bool dealerSoftDealt = false;
                     bool playerStand = false;
                     bool dealerStand = false;
