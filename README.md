@@ -1,14 +1,14 @@
-CONSOLE CASINO LITE v1.0
+# CONSOLE CASINO
 
-DESCRIPTION:
+## DESCRIPTION:
 This application is a collection of casino games that will be played in a console window. This application was written entirely in C++ and is a continuous work in progress. Users are invited to download and play the games as much as they like.
 Please note this will only be updated in my spare time, with no set update schedule. Also, this was my first actual fully written project for my Computer Science major, so there's going to be a lot of heavily unoptimized things, especially if you know more than me.
 Just be patient and realize that this is just a light-hearted demonstration. The one thing that will not ever change is the fact that this will always be a console window game.
 
-GAMEPLAY:
+## GAMEPLAY:
 Player will start with $100 for money. Player can make any bet of whole numbers $1 or higher with returns outlined in the game description. If the player hits $0, the game will be over. Current games are as follows.
 
-Blackjack:
+### Blackjack:
 Blackjack is a game between the player and the dealer where each party tries to get as close to 21 as possible without going over. The game starts with the player making an inital bet and each party being dealt 2 cards. 
 The player will only see the dealer's first card. The player can "hit" adding a new card to their hand until they "stand" and are done playing. The dealer will then do the same. Aces in blackjack are different, they count as either 1 or 11 points. 
 The 11 points is known as a soft score. If you stand with a soft score higher than your hard score, and it is not over 21, your soft score will become your hard score.
@@ -19,7 +19,7 @@ Table rules for blackjack are as follows:
 - No Splits
 - No Doubles
 
-5-Card Poker:
+### 5-Card Poker:
 In this version of 5-card poker, the user will make an initial bet from their bank, and will get the opportunity to switch out up to 3 cards in their hand. The cards are ordered, from left to right, 1 2 3 4 5. 
 After this, the game will determine if a winning hand is held, and will return the user's bet on a linear scale.
 Payouts for 5 card poker:
@@ -29,10 +29,13 @@ Payouts for 5 card poker:
 - Two Pair: 2:1
 - Pair: 1:1
 
-HOW TO INSTALL:
+## HOW TO INSTALL:
+### For first-time GitHub users:
+On the main page, click the greeen button that says "code", and click "download zip". Extract the folder and run the .exe file in the Application folder.
+### For experience GitHub users:
 Download the Source code and run console_casino.exe in the Application Folder
 
-SYSTEM REQUIREMENTS:
+## SYSTEM REQUIREMENTS:
 - CPU: Any modern dual-core would do
 - RAM: 1GB
 - GPU: Enough to display a terminal window. This can achieve +60fps on onboard graphics easy.
