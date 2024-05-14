@@ -27,9 +27,9 @@ int main(int argc, char** argv)
     {
         case 1:
         {
+            clearConsole();
             do
             {
-                clearConsole();
                 int playerScore = 0; // Used for scoring
                 int dealerScore = 0;
                 int playerSoft = 0; // Alternate scores when ace is dealt.
@@ -43,135 +43,137 @@ int main(int argc, char** argv)
                 do
                 {
                     playerBet = getPlayerBet(playerChips);
-                } while (playerBet <= 0 || playerBet > playerChips);
-                playerChips -= playerBet;
-                clearConsole();
-                // Do initial deal
-                showChips(playerChips);
-                for (int i = 0; i < 2; i++) // Deal player 2 cards
+                } while (playerBet < 0 || playerBet > playerChips);
+                if (playerBet != 0)
                 {
-                    currentCard = generateNewCard();
-                    playerScore += currentCard;
-                    if((currentCard == 1 && !playerStand) || (playerSoft > 0 && playerSoft < 21))
-                    {
-                        playerSoft = playerScore + 10;
-                    }
-                }
-                if (playerScore == 21) // Improperly Scores (Issue #16)
-                {
-                    playerStand = true;
-                    playerHasBlackjack = true;
-                }
-                dealerScore += generateNewCard();
-                if(dealerScore == 1)
-                {
-                    dealerSoft = dealerScore + 10;
-                }
-                while (!playerStand && playerScore < 21)
-                {
-                    
-                    if (playerSoft <= 21 && playerSoft > 0)// Will output user's soft score if it exists and won't result in a bust
-                    {
-                        std::cout << "You have " << playerScore << "/" << playerSoft << std::endl;
-                    }
-                    else
-                    {
-                        std::cout << "You have " << playerScore << std::endl;
-                    }
-                    if (dealerScore == 1 || dealerSoft > 0)
-                    {
-                        std::cout << "Dealer has" << dealerScore << "/" << dealerSoft << std::endl;
-                    }
-                    else
-                    {
-                        std::cout << "Dealer has " << dealerScore << std::endl;
-                    }
-                    int play;
-                    std::cout << "1) Hit" << std::endl;
-                    std::cout << "2) Stand" << std::endl;
-                    std::cout << "Please make a selection: ";
-                    std::cin >> play;
-                    switch (play)
-                    {
-                        case 1:
-                            currentCard = generateNewCard();
-                            playerScore += currentCard;
-                            break;
-                        case 2:
-                            playerStand = true;
-                            break;
-                        default:
-                            std::cout << "Invalid input." << std::endl;
-                    }
-                    if((currentCard == 1 && !playerStand) || (playerSoft > 0 && playerSoft < 21))
-                    {
-                        playerSoft = playerScore + 10;
-                    }
+                    playerChips -= playerBet;
                     clearConsole();
-                }
-                if (playerSoft > playerScore)
-                {
-                    playerScore = playerSoft;
-                }
-                if (playerScore > 21)
-                {
-                    dealerStand = true;
-                }
-                while (playerStand && !dealerStand)
-                {
-                    if (dealerScore < 18 && dealerSoft <= 17)
+                    // Do initial deal
+                    showChips(playerChips);
+                    for (int i = 0; i < 2; i++) // Deal player 2 cards
                     {
                         currentCard = generateNewCard();
-                        dealerScore += currentCard;
-                        if((currentCard == 1 && !dealerStand) || (dealerSoft > 0 && dealerSoft < 21))
+                        playerScore += currentCard;
+                        if((currentCard == 1 && !playerStand) || (playerSoft > 0 && playerSoft < 21))
                         {
-                            dealerSoft = dealerScore + 10;
+                            playerSoft = playerScore + 10;
                         }
                     }
-                    else
+                    if (playerScore == 21) // Improperly Scores (Issue #16)
+                    {
+                        playerStand = true;
+                        playerHasBlackjack = true;
+                    }
+                    dealerScore += generateNewCard();
+                    if(dealerScore == 1)
+                    {
+                        dealerSoft = dealerScore + 10;
+                    }
+                    while (!playerStand && playerScore < 21)
+                    {
+
+                        if (playerSoft <= 21 && playerSoft > 0)// Will output user's soft score if it exists and won't result in a bust
+                        {
+                            std::cout << "You have " << playerScore << "/" << playerSoft << std::endl;
+                        }
+                        else
+                        {
+                            std::cout << "You have " << playerScore << std::endl;
+                        }
+                        if (dealerScore == 1 || dealerSoft > 0)
+                        {
+                            std::cout << "Dealer has" << dealerScore << "/" << dealerSoft << std::endl;
+                        }
+                        else
+                        {
+                            std::cout << "Dealer has " << dealerScore << std::endl;
+                        }
+                        int blackjackMenu;
+                        std::cout << "1) Hit" << std::endl;
+                        std::cout << "2) Stand" << std::endl;
+                        std::cout << "Whats your play?: ";
+                        std::cin >> blackjackMenu;
+                        switch (blackjackMenu)
+                        {
+                            case 1:
+                                currentCard = generateNewCard();
+                                playerScore += currentCard;
+                                break;
+                            case 2:
+                                playerStand = true;
+                                break;
+                            default:
+                                std::cout << "Invalid input." << std::endl;
+                                break;
+                        }
+                        if((currentCard == 1 && !playerStand) || (playerSoft > 0 && playerSoft < 21))
+                        {
+                            playerSoft = playerScore + 10;
+                        }
+                        clearConsole();
+                    }
+                    if (playerSoft > playerScore)
+                    {
+                        playerScore = playerSoft;
+                    }
+                    if (playerScore > 21)
                     {
                         dealerStand = true;
                     }
+                    while (playerStand && !dealerStand)
+                    {
+                        if (dealerScore < 18 && dealerSoft <= 17)
+                        {
+                            currentCard = generateNewCard();
+                            dealerScore += currentCard;
+                            if((currentCard == 1 && !dealerStand) || (dealerSoft > 0 && dealerSoft < 21))
+                            {
+                                dealerSoft = dealerScore + 10;
+                            }
+                        }
+                        else
+                        {
+                            dealerStand = true;
+                        }
+                    }
+                    clearConsole();
+                    if (dealerSoft > dealerScore)
+                    {
+                        dealerScore = dealerSoft;
+                    }
+                    if (playerHasBlackjack && playerScore > dealerScore)
+                    {
+                        std::cout << "Blackjack!" << std::endl;
+                        playerChips += (playerBet * 3.5);
+                    }
+                    else if (playerScore > 21)
+                    {
+                        std::cout << "Player busts" << std::endl;
+                    }
+                    else if (dealerScore > 21)
+                    {
+                        std::cout << "Dealer busts" << std::endl;
+                        playerChips += (playerBet * 2);
+                    }
+                    else if (dealerScore > playerScore)
+                    {
+                        std::cout << "Dealer wins" << std::endl;
+                    }
+                    else if (playerScore > dealerScore)
+                    {
+                        std::cout << "Player wins" << std::endl;
+                        playerChips += (playerBet * 2);
+                    }
+                    else
+                    {
+                        std::cout << "Push. Nobody wins" << std::endl;
+                        playerChips += playerBet;
+                    }
+                    std::cout << "Player: " << playerScore << std::endl
+                            << "Dealer: " << dealerScore << std::endl;
+                    showChips(playerChips);
                 }
-                clearConsole();
-                if (dealerSoft > dealerScore)
-                {
-                    dealerScore = dealerSoft;
-                }
-                if (playerHasBlackjack && playerScore > dealerScore)
-                {
-                    std::cout << "Blackjack!" << std::endl;
-                    playerChips += (playerBet * 3.5);
-                }
-                else if (playerScore > 21)
-                {
-                    std::cout << "Player busts" << std::endl;
-                }
-                else if (dealerScore > 21)
-                {
-                    std::cout << "Dealer busts" << std::endl;
-                    playerChips += (playerBet * 2);
-                }
-                else if (dealerScore > playerScore)
-                {
-                    std::cout << "Dealer wins" << std::endl;
-                }
-                else if (playerScore > dealerScore)
-                {
-                    std::cout << "Player wins" << std::endl;
-                    playerChips += (playerBet * 2);
-                }
-                else
-                {
-                    std::cout << "Push. Nobody wins" << std::endl;
-                    playerChips += playerBet;
-                }
-                std::cout << "Player: " << playerScore << std::endl
-                        << "Dealer: " << dealerScore << std::endl;
-                showChips(playerChips);
-                std::cout << "Would you like to play again? Y/N: ";
-                std::cin >> userInput;
-            } while (tolower(userInput[0]) == 'y' && playerChips > 0);
+            } while (playerBet > 0 && playerChips > 0);
             break;
         }
         case 2:
@@ -186,64 +188,67 @@ int main(int argc, char** argv)
                 do
                 {
                     playerBet = getPlayerBet(playerChips);
-                } while (playerBet <= 0 || playerBet > playerChips);
-                clearConsole();
-                showChips(playerChips);
-                
-                int* playerHand;
-                playerHand = newPokerHand(SIZE_OF_HAND);
-                outputPokerHand(playerHand, SIZE_OF_HAND);
-                
-                std::cout << "1) Switch" << std::endl;
-                std::cout << "2) Keep" << std::endl;
-                std::cout << "Please make a selection: ";
-                std::cin >> pokerMenu;
-                
-                switch (pokerMenu)
+                } while (playerBet < 0 || playerBet > playerChips);
+                while(playerBet != 0)
                 {
-                    case 1:
-                        changeCardsInHand(playerHand);
-                        outputPokerHand(playerHand, SIZE_OF_HAND);
-                        break;
-                    case 2:
-                        outputPokerHand(playerHand, SIZE_OF_HAND);
-                        break;
+                    clearConsole();
+                    showChips(playerChips);
+
+                    int* playerHand;
+                    playerHand = newPokerHand(SIZE_OF_HAND);
+                    outputPokerHand(playerHand, SIZE_OF_HAND);
+
+                    std::cout << "1) Switch" << std::endl;
+                    std::cout << "2) Keep" << std::endl;
+                    std::cout << "Please make a selection: ";
+                    std::cin >> pokerMenu;
+
+                    switch (pokerMenu)
+                    {
+                        case 1:
+                            changeCardsInHand(playerHand);
+                            outputPokerHand(playerHand, SIZE_OF_HAND);
+                            break;
+                        case 2:
+                            outputPokerHand(playerHand, SIZE_OF_HAND);
+                            break;
+                    }
+                    clearConsole();
+
+                    winID = pokerWinCheck(playerHand, SIZE_OF_HAND);
+                    outputPokerHand(playerHand, SIZE_OF_HAND);
+                    if (winID == 5) // 4-of-a-kind
+                    {
+                        std::cout << "4 of a kind!" << std::endl;
+                        playerChips += playerBet * 6;
+                    }
+                    else if (winID == 4) // Full House
+                    {
+                        std::cout << "Full House!" << std::endl;
+                        playerChips += playerBet * 5;
+                    }
+                    else if (winID == 3) // 3 of a kind
+                    {
+                        std::cout << "3 of a kind!" << std::endl;
+                        playerChips += playerBet * 4;
+                    }
+                    else if (winID == 2)
+                    {
+                        std::cout << "Two Pair!" << std::endl;
+                        playerChips += playerBet * 3;
+                    }
+                    else if (winID == 1)
+                    {
+                        std::cout << "Pair!" << std::endl;
+                        playerChips += playerBet * 2;
+                    }
+                    else
+                    {
+                        std::cout << "You lose" << std::endl;
+                    }
+                    showChips(playerChips);
                 }
-                clearConsole();
-                
-                winID = pokerWinCheck(playerHand, SIZE_OF_HAND);
-                outputPokerHand(playerHand, SIZE_OF_HAND);
-                if (winID == 5) // 4-of-a-kind
-                {
-                    std::cout << "4 of a kind!" << std::endl;
-                    playerChips += playerBet * 6;
-                }
-                else if (winID == 4) // Full House
-                {
-                    std::cout << "Full House!" << std::endl;
-                    playerChips += playerBet * 5;
-                }
-                else if (winID == 3) // 3 of a kind
-                {
-                    std::cout << "3 of a kind!" << std::endl;
-                    playerChips += playerBet * 4;
-                }
-                else if (winID == 2)
-                {
-                    std::cout << "Two Pair!" << std::endl;
-                    playerChips += playerBet * 3;
-                }
-                else if (winID == 1)
-                {
-                    std::cout << "Pair!" << std::endl;
-                    playerChips += playerBet * 2;
-                }
-                else
-                {
-                    std::cout << "You lose" << std::endl;
-                }
-                showChips(playerChips);
-            } while (tolower(userInput[0]) == 'y' && playerChips > 0);
+            } while (playerBet > 0 && playerChips > 0);
             break;
         }
         case 3:
