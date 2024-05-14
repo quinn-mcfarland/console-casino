@@ -252,7 +252,6 @@ int main(int argc, char** argv)
                         {
                             std::cout << "You lose" << std::endl;
                         }
-                        showChips(playerChips);
                     }
                 } while (playerBet > 0 && playerChips > 0);
                 break;
@@ -360,50 +359,42 @@ int main(int argc, char** argv)
      * @param handSize - The size of the hand
      * @return - The ID number of a winning hand.
      */
-    int pokerWinCheck(int* handArray, int handSize) // Rework this (Issue #22)
+    int pokerWinCheck(int* handArray, int handSize)
     {
         int fullHouseCheck = 0;
         int twoPairCheck = 0;
         int winID = 0;
-        // Change this whole function to work better
-        bool check[handSize];
-        for (int i = 0; i < handSize; i++)
-        {
-            check[i] = 0;
-        }
-        for (int i = 0; i < handSize; i++)
-        {
-            if (check[i] == 1)
+        int count = 0;
+        int highCount = 0;
+        for (int i = 0; i < handSize - 1; i++)
+        {;
+            count = 1;
+            for (int j = i; j < handSize; j++)
             {
-                continue;
-            }
-            int count = 1;
-            for (int j = i + 1; j < handSize; j++)
-            {
-                if (handArray[i] == handArray[j])
+                if(handArray[j] == handArray[i])
                 {
-                    check[j] = 1;
                     count++;
                 }
             }
-            if (count == 4)
+            if (count > highCount)
             {
-                winID = 5;
+                highCount = count;
             }
-            else if (count == 3)
-            {
-                fullHouseCheck++;
-                winID = 3;
-            }
-            else if (count == 2)
-            {
-                twoPairCheck++;
-                fullHouseCheck++;
-                winID = 1;
-            }
-            else // delete
-            {
-            }
+        }
+        if (count == 4)
+        {
+            winID = 5;
+        }
+        if (count == 3)
+        {
+            fullHouseCheck++;
+            winID = 3;
+        }
+        if (count == 2)
+        {
+            twoPairCheck++;
+            fullHouseCheck++;
+            winID = 1;
         }
         if (fullHouseCheck == 2)
         {
@@ -413,5 +404,6 @@ int main(int argc, char** argv)
         {
             winID = 2;
         }
+        std::cout << count << std::endl;
         return winID;
     }
