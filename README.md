@@ -36,8 +36,8 @@ On the main page, click the greeen button that says "code", and click "download 
 Download the Source code and run console_casino.exe in the Application Folder
 
 ## SYSTEM REQUIREMENTS:
-- CPU: Any modern dual-core would do
+- CPU: Dual-Core Processor
 - RAM: 1GB
-- GPU: Enough to display a terminal window. This can achieve +60fps on onboard graphics easy.
+- GPU: Integrated Graphics
 - Storage: ~10MB
 - OS: Windows 10+
