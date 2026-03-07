@@ -3,22 +3,25 @@
 #include <iostream> // For the I/O needed for all the games
 #include <iomanip> // For manipulation of I/O
 #include <ctime> // For the RNG
+#include <string> // String library
 
 // Header Inclusions
-
+#include "blackjack.h"
+#include "fiveCardPoker.h"
+#include "userData.h"
 
 // Global Constants
 const int FIVE_CARD_HAND_SIZE = 5;
 
 // Function Prototypes
-int getPlayerBet(int playerChips);
-void clearConsole();
-void showChips(int playerChips);
-int generateNewCard();
-int* newPokerHand(int handSize);
-void outputPokerHand(int* handArray, int handSize);
-void pokerExchange(int*& handArray);
-int pokerWinCheck(int* handArray, int handSize);
+int getPlayerBet(int playerChips); // Global Function
+void clearConsole(); // Global Function
+void showChips(int playerChips); // userData Function
+int generateNewCard(); // Global Function
+int* newPokerHand(int handSize); // fiveCardPoker Function
+void outputPokerHand(int* handArray, int handSize); // fiveCardPoker Function
+void pokerExchange(int*& handArray); //fiveCardPoker Function
+int pokerWinCheck(int* handArray, int handSize); //fiveCardPoker Function
 
 // Main Function
 int main(int argc, char** argv)
