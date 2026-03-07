@@ -1,9 +1,15 @@
+//Library Inclusions
 #include <cstdlib> // Core library. Do not remove.
 #include <iostream> // For the I/O needed for all the games
 #include <iomanip> // For manipulation of I/O
 #include <ctime> // For the RNG
+
+// Header Inclusions
+
+
 // Global Constants
 const int FIVE_CARD_HAND_SIZE = 5;
+
 // Function Prototypes
 int getPlayerBet(int playerChips);
 void clearConsole();
@@ -13,6 +19,8 @@ int* newPokerHand(int handSize);
 void outputPokerHand(int* handArray, int handSize);
 void pokerExchange(int*& handArray);
 int pokerWinCheck(int* handArray, int handSize);
+
+// Main Function
 int main(int argc, char** argv)
 {
     std::string userInput;
