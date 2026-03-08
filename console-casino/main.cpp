@@ -6,22 +6,9 @@
 #include <string> // String library
 
 // Header Inclusions
+#include "userData.h"
 #include "blackjack.h"
 #include "fiveCardPoker.h"
-#include "userData.h"
-
-// Global Constants
-const int FIVE_CARD_HAND_SIZE = 5;
-
-// Function Prototypes
-int getPlayerBet(int playerChips); // Global Function
-void clearConsole(); // Global Function
-void showChips(int playerChips); // userData Function
-int generateNewCard(); // Global Function
-int* newPokerHand(int handSize); // fiveCardPoker Function
-void outputPokerHand(int* handArray, int handSize); // fiveCardPoker Function
-void pokerExchange(int*& handArray); //fiveCardPoker Function
-int pokerWinCheck(int* handArray, int handSize); //fiveCardPoker Function
 
 // Main Function
 int main(int argc, char** argv)
@@ -29,11 +16,9 @@ int main(int argc, char** argv)
     std::string userInput;
     int menu; // Main menu variable
     srand(time(0)); // Seeds the RNG
-    int playerChips = 100; // Player's money
-    int playerBet = 0; // Global variable for player bet
     do
     {
-        showChips(playerChips);
+        showChips();
         std::cout << "1) Blackjack" << std::endl;
         std::cout << "2) 5-Card Poker" << std::endl;
         std::cout << "3) Exit" << std::endl;
@@ -46,26 +31,18 @@ int main(int argc, char** argv)
                 clearConsole();
                 do
                 {
-                    int playerScore = 0; // Used for scoring
-                    int dealerScore = 0;
-                    int playerSoft = 0; // Alternate scores when ace is dealt.
-                    int dealerSoft = 0;
-                    int currentCard = 0;
-                    bool playerStand = false;
-                    bool dealerStand = false;
-                    bool playerHasBlackjack = false;
                     // Get bets
-                    showChips(playerChips);
+                    showChips();
                     do
                     {
-                        playerBet = getPlayerBet(playerChips);
+                        playerBet = getPlayerBet();
                     } while (playerBet < 0 || playerBet > playerChips);
                     if (playerBet != 0)
                     {
                         playerChips -= playerBet;
                         clearConsole();
                         // Do initial deal
-                        showChips(playerChips);
+                        showChips();
                         for (int i = 0; i < 2; i++) // Deal player 2 cards
                         {
                             currentCard = generateNewCard();
@@ -75,7 +52,7 @@ int main(int argc, char** argv)
                                 playerSoft = playerScore + 10;
                             }
                         }
-                        if (playerScore == 21) // Improperly Scores (Issue #16)
+                        if (playerScore == 21)
                         {
                             playerStand = true;
                             playerHasBlackjack = true;
@@ -202,14 +179,14 @@ int main(int argc, char** argv)
 
                     do
                     {
-                        showChips(playerChips);
-                        playerBet = getPlayerBet(playerChips);
+                        showChips();
+                        playerBet = getPlayerBet();
                     } while (playerBet < 0 || playerBet > playerChips);
                     if(playerBet != 0)
                     {
                         playerChips -= playerBet;
                         clearConsole();
-                        showChips(playerChips);
+                        showChips();
 
                         int* playerHand;
                         playerHand = newPokerHand(FIVE_CARD_HAND_SIZE);
@@ -277,47 +254,7 @@ int main(int argc, char** argv)
     } while(menu != 3 && playerChips > 0);
     return 0;
 }
-    /**
-     * Gets players bet when invoked.
-     * @param playerChips - The current amount of money the player has.
-     * @return - The player's bet. Used for payouts later.
-     */
-    int getPlayerBet(int playerChips)
-    {
-        int playerBet;
-        std::cout << "Place your bet (Bet 0 to exit): ";
-        std::cin >> playerBet;
-        return playerBet;
-    }
-    /**
-     * Clears the console
-     */
-    void clearConsole()
-    {
-        for (int i = 0; i < 10; i++)
-        {
-            std::cout << "\n\n\n\n\n\n\n\n\n\n";
-        }
-
-    }
-    /**
-     * Outputs amount of money player has.
-     * @param playerChips - The current amount of money the player has.
-     */
-    void showChips(int playerChips)
-    {
-        std::cout << "You have $" << playerChips << std::endl;
-    }
-    /**
-     * Generates a new hand for active players during 5 card poker.
-     * @param handSize - size of the hand. Should be a constant.
-     * @return - The entire hand array after generation.
-     */
-    int generateNewCard()
-    {
-        int card = rand() % 10 + 1;
-        return card;
-    }
+   
     int* newPokerHand(int handSize)
     {
         static int handArray[5];
