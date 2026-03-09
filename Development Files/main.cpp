@@ -63,6 +63,28 @@ int main(int argc, char** argv)
             }
             case 2:
             {
+                clearConsole();
+                
+                do
+                {
+                    // Get Player's bet
+                    playerBet = getPlayerBet();
+
+                    if (playerBet != 0)
+                    {
+                        // Deduct money from player's bank and deal them a fresh hand.
+                        playerChips -= playerBet;
+                        clearConsole();
+                        newPokerHand(playerHand);
+
+                        // Run the exchange function to decide if the player wants to exchange cards from their hand
+                        pokerExchange(playerHand);
+
+                        // Then run the win condition checker
+                        pokerWinCheck(playerHand);
+                    }
+                } while (playerBet > 0 && playerChips > 0);
+
                 break;
             }
             case 3:

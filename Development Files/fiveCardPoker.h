@@ -2,16 +2,12 @@
 #define FIVECARDPOKER_H
 
 // Function Prototypes
-int* newPokerHand(int handsize);
-void outputPokerHand(int* handArray, int handSize);
-void pokerExchange(int*& handArray);
-int pokerWinCheck(int* handArray, int handSize);
-
-// Constant Declarations
-extern const int FIVE_CARD_HAND_SIZE;
+void newPokerHand(std::array<int, 5>& handArray);
+void outputPokerHand(const std::array<int, 5>& handArray);
+void pokerExchange(std::array<int, 5>& handArray);
+void pokerWinCheck(const std::array<int, 5>& handArray);
 
 // Variable Declarations
-extern int winID;
-extern int* playerHand;
+extern std::array<int, 5> playerHand;
 
 #endif // !FIVECARDPOKER_H

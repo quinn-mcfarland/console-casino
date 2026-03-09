@@ -32,10 +32,7 @@ void blackjackNewGame()
     playerHasBlackjack = false;
     
     // Get Bet
-    showChips();
-    do {
-        playerBet = getPlayerBet();
-    } while (playerBet < 0 || playerBet > playerChips);
+    playerBet = getPlayerBet();
         
     // Set Table for new Game
     if (playerBet != 0)

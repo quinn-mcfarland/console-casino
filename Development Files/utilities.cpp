@@ -35,8 +35,12 @@ void showChips()
  */
 int getPlayerBet()
 {
-    std::cout << "Place your bet (Bet 0 to exit): ";
-    std::cin >> playerBet;
+    showChips();
+    do
+    {
+        std::cout << "Place your bet (Bet 0 to exit): ";
+        std::cin >> playerBet;
+    } while (playerBet < 0 || playerBet > playerChips);
     return playerBet;
 }
 
