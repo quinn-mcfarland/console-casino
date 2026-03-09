@@ -19,13 +19,20 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8C4E16402F5DF5270006E939 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		8C4E16472F5E475D0006E939 /* console-casino */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "console-casino"; sourceTree = "<group>"; };
+		8C4E16492F5E475D0006E939 /* console_casino.exe */ = {isa = PBXFileReference; lastKnownFileType = file; path = console_casino.exe; sourceTree = "<group>"; };
+		8C4E164A2F5E475D0006E939 /* cyggcc_s-seh-1.dll */ = {isa = PBXFileReference; lastKnownFileType = file; path = "cyggcc_s-seh-1.dll"; sourceTree = "<group>"; };
+		8C4E164B2F5E475D0006E939 /* cygstdc++-6.dll */ = {isa = PBXFileReference; lastKnownFileType = file; path = "cygstdc++-6.dll"; sourceTree = "<group>"; };
+		8C4E164C2F5E475D0006E939 /* cygwin1.dll */ = {isa = PBXFileReference; lastKnownFileType = file; path = cygwin1.dll; sourceTree = "<group>"; };
+		8C4E164E2F5E475D0006E939 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		8CEB11BF2F5CB22500AF407E /* console-casino */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "console-casino"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		8CEB11C12F5CB22500AF407E /* console-casino */ = {
+		8CEB11C12F5CB22500AF407E /* Development Files */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "console-casino";
+			path = "Development Files";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -41,10 +48,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C4E16482F5E475D0006E939 /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				8C4E16472F5E475D0006E939 /* console-casino */,
+			);
+			path = macOS;
+			sourceTree = "<group>";
+		};
+		8C4E164D2F5E475D0006E939 /* Windows */ = {
+			isa = PBXGroup;
+			children = (
+				8C4E16492F5E475D0006E939 /* console_casino.exe */,
+				8C4E164A2F5E475D0006E939 /* cyggcc_s-seh-1.dll */,
+				8C4E164B2F5E475D0006E939 /* cygstdc++-6.dll */,
+				8C4E164C2F5E475D0006E939 /* cygwin1.dll */,
+			);
+			path = Windows;
+			sourceTree = "<group>";
+		};
+		8C4E164F2F5E475D0006E939 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				8C4E16482F5E475D0006E939 /* macOS */,
+				8C4E164D2F5E475D0006E939 /* Windows */,
+				8C4E164E2F5E475D0006E939 /* LICENSE */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
 		8CEB11B62F5CB22500AF407E = {
 			isa = PBXGroup;
 			children = (
-				8CEB11C12F5CB22500AF407E /* console-casino */,
+				8C4E16402F5DF5270006E939 /* README.md */,
+				8C4E164F2F5E475D0006E939 /* Application */,
+				8CEB11C12F5CB22500AF407E /* Development Files */,
 				8CEB11C02F5CB22500AF407E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -73,7 +111,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				8CEB11C12F5CB22500AF407E /* console-casino */,
+				8CEB11C12F5CB22500AF407E /* Development Files */,
 			);
 			name = "console-casino";
 			packageProductDependencies = (
