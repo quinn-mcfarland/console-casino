@@ -1,3 +1,11 @@
+/* Miscellaneous GitHub Issues
+*  Issue #6: Implementing Save Files for users
+*  Issue #19: Implementing a version of Roulette
+*  Issue #20: Implementing a version of Craps
+*  Issue #21: Implementing a version of Slots
+*  Issue #29: Implementing card deck objects.
+*/ 
+
 //Library Inclusions
 #include <cstdlib> // Core library.
 #include <iostream> // Library to manage I/O streams
@@ -16,6 +24,8 @@ int main(int argc, char** argv)
     // Set up program variables
     std::string userInput;
     int menu = 0;// Main menu variable for switch case
+
+    // Issue #30: This is not the most modern version of a PRNG and should be updated.
     srand((unsigned int)time(NULL)); // Seeds the PRNG
     
     // Main Menu
