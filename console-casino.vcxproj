@@ -129,11 +129,13 @@
   <ItemGroup>
     <ClInclude Include="Development Files\blackjack.h" />
     <ClInclude Include="Development Files\utilities.h" />
+    <ClInclude Include="fiveCardPoker.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Development Files\blackjack.cpp" />
     <ClCompile Include="Development Files\main.cpp" />
     <ClCompile Include="Development Files\utilities.cpp" />
+    <ClCompile Include="fiveCardPoker.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

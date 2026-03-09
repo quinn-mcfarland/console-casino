@@ -8,6 +8,7 @@
 // Header Inclusions
 #include "utilities.h"
 #include "blackjack.h"
+#include "fiveCardPoker.h"
 
 // Main Function
 int main(int argc, char** argv)
