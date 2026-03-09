@@ -94,5 +94,40 @@ void blackjackNewGame()
     {
         std::cout << "Dealer has " << dealerScore << std::endl;
     }
+}
+
+/**
+ Function to process the player's current turn for blackjack.
+ */
+void blackjackPlayersTurn()
+{
+    // Declare a menu variable for the player's turn.
+    int blackjackMenu;
     
+    // Prompt the player to hit or stand
+    std::cout << "1) Hit" << std::endl;
+    std::cout << "2) Stand" << std::endl;
+    std::cout << "Make a selection: ";
+    std::cin >> blackjackMenu;
+    
+    // Switch case for the player's turn
+    switch (blackjackMenu)
+    {
+        case 1:
+            currentCard = generateNewCard();
+            playerScore += currentCard;
+            break;
+        case 2:
+            playerStand = true;
+            break;
+        case 3:
+            std::cout << "Invalid input." << std::endl;
+            break;
+    }
+    
+    // Process if the new card was a 1 and the player can be given a valid soft score
+    if ((currentCard == 1 && !playerStand) || (playerSoft > 0 && playerSoft < 21))
+    {
+        playerSoft = playerScore + 10;
+    }
 }
