@@ -50,6 +50,9 @@ int main(int argc, char** argv)
                     {
                         blackjackDealersTurn();
                     }
+
+                    // When all parties stand, score the round and pay out player for a win.
+                    blackjackScoring();
                 } while (playerBet > 0 && playerChips > 0);
                 break;
             }

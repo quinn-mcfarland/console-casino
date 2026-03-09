@@ -131,3 +131,49 @@ void blackjackPlayersTurn()
         playerSoft = playerScore + 10;
     }
 }
+
+/**
+Processes the dealer's turn for blackjack.
+*/
+void blackjackDealersTurn()
+{
+    // First the dealer will check if the player has bust. If they have, the dealer will automatically stand.
+    if (playerScore > 21)
+    {
+        dealerStand = true;
+    }
+
+    // Dealer will play only when the player has stood and while they aren't standing themself.
+    while (playerStand && !dealerStand)
+    {
+        // Dealer will hit under 18 and when at or under a soft 17, else dealer will stand.
+        if (dealerScore < 18 && dealerSoft <= 17)
+        {
+            currentCard = generateNewCard();
+            dealerScore += currentCard;
+            if ((currentCard == 1 && !dealerStand) || dealerSoft > 0 && dealerSoft < 21)
+            {
+                dealerSoft = dealerScore + 10;
+            }
+        }
+        else
+        {
+            dealerStand = true;
+        }
+    }
+}
+
+void blackjackScoring()
+{
+    // Check if either party has a soft score better than their hard score. If so, assign it.
+    if (dealerSoft > dealerScore)
+    {
+        dealerScore = dealerSoft;
+    }
+    if (playerSoft > playerScore)
+    {
+        playerScore = playerSoft;
+    }
+
+    // Score the round
+}
