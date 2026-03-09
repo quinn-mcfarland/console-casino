@@ -1,5 +1,2 @@
-﻿  main.cpp
-  fiveCardPoker.cpp
-C:\Users\lilmc\OneDrive\Documents\Repos\console-casino\Development Files\main.cpp(11,10): error C1083: Cannot open include file: 'fiveCardPoker.h': No such file or directory
-C:\Users\lilmc\OneDrive\Documents\Repos\console-casino\fiveCardPoker.cpp(8,10): error C1083: Cannot open include file: 'utilities.h': No such file or directory
-  Generating Code...
+﻿  console-casino.cpp
+  console-casino.vcxproj -> C:\Users\lilmc\OneDrive\Desktop\console-casino\x64\Debug\console-casino.exe

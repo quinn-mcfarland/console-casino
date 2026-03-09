@@ -1,22 +1,10 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\lilmc\\OneDrive\\Documents\\Repos\\console-casino\\",
+  "WorkspaceRootPath": "C:\\Users\\lilmc\\OneDrive\\Desktop\\console-casino\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{839C6126-2D9A-4A48-9AFC-3AC228CE92E6}|console-casino.vcxproj|C:\\Users\\lilmc\\OneDrive\\Documents\\Repos\\console-casino\\fiveCardPoker.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{839C6126-2D9A-4A48-9AFC-3AC228CE92E6}|console-casino.vcxproj|solutionrelative:fiveCardPoker.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{839C6126-2D9A-4A48-9AFC-3AC228CE92E6}|console-casino.vcxproj|C:\\Users\\lilmc\\OneDrive\\Documents\\Repos\\console-casino\\fiveCardPoker.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{839C6126-2D9A-4A48-9AFC-3AC228CE92E6}|console-casino.vcxproj|solutionrelative:fiveCardPoker.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{839C6126-2D9A-4A48-9AFC-3AC228CE92E6}|console-casino.vcxproj|C:\\Users\\lilmc\\OneDrive\\Documents\\Repos\\console-casino\\Development Files\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{839C6126-2D9A-4A48-9AFC-3AC228CE92E6}|console-casino.vcxproj|solutionrelative:Development Files\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{839C6126-2D9A-4A48-9AFC-3AC228CE92E6}|console-casino.vcxproj|C:\\Users\\lilmc\\OneDrive\\Documents\\Repos\\console-casino\\Development Files\\utilities.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{839C6126-2D9A-4A48-9AFC-3AC228CE92E6}|console-casino.vcxproj|solutionrelative:Development Files\\utilities.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{10CCA09A-43AE-4508-A401-99E88D074CAF}|console-casino.vcxproj|C:\\Users\\lilmc\\OneDrive\\Desktop\\console-casino\\console-casino.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{10CCA09A-43AE-4508-A401-99E88D074CAF}|console-casino.vcxproj|solutionrelative:console-casino.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,58 +14,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "fiveCardPoker.h",
-              "DocumentMoniker": "C:\\Users\\lilmc\\OneDrive\\Documents\\Repos\\console-casino\\fiveCardPoker.h",
-              "RelativeDocumentMoniker": "fiveCardPoker.h",
-              "ToolTip": "C:\\Users\\lilmc\\OneDrive\\Documents\\Repos\\console-casino\\fiveCardPoker.h",
-              "RelativeToolTip": "fiveCardPoker.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-03-09T04:15:23.661Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "fiveCardPoker.cpp",
-              "DocumentMoniker": "C:\\Users\\lilmc\\OneDrive\\Documents\\Repos\\console-casino\\fiveCardPoker.cpp",
-              "RelativeDocumentMoniker": "fiveCardPoker.cpp",
-              "ToolTip": "C:\\Users\\lilmc\\OneDrive\\Documents\\Repos\\console-casino\\fiveCardPoker.cpp",
-              "RelativeToolTip": "fiveCardPoker.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-03-09T04:15:32.159Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "utilities.cpp",
-              "DocumentMoniker": "C:\\Users\\lilmc\\OneDrive\\Documents\\Repos\\console-casino\\Development Files\\utilities.cpp",
-              "RelativeDocumentMoniker": "Development Files\\utilities.cpp",
-              "ToolTip": "C:\\Users\\lilmc\\OneDrive\\Documents\\Repos\\console-casino\\Development Files\\utilities.cpp",
-              "RelativeToolTip": "Development Files\\utilities.cpp",
+              "Title": "console-casino.cpp",
+              "DocumentMoniker": "C:\\Users\\lilmc\\OneDrive\\Desktop\\console-casino\\console-casino.cpp",
+              "RelativeDocumentMoniker": "console-casino.cpp",
+              "ToolTip": "C:\\Users\\lilmc\\OneDrive\\Desktop\\console-casino\\console-casino.cpp",
+              "RelativeToolTip": "console-casino.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-03-09T04:00:01.702Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "main.cpp",
-              "DocumentMoniker": "C:\\Users\\lilmc\\OneDrive\\Documents\\Repos\\console-casino\\Development Files\\main.cpp",
-              "RelativeDocumentMoniker": "Development Files\\main.cpp",
-              "ToolTip": "C:\\Users\\lilmc\\OneDrive\\Documents\\Repos\\console-casino\\Development Files\\main.cpp",
-              "RelativeToolTip": "Development Files\\main.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-03-09T03:50:24.476Z",
+              "WhenOpened": "2026-03-09T04:31:44.855Z",
               "EditorCaption": ""
             }
           ]

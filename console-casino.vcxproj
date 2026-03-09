@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{839c6126-2d9a-4a48-9afc-3ac228ce92e6}</ProjectGuid>
+    <ProjectGuid>{10cca09a-43ae-4508-a401-99e88d074caf}</ProjectGuid>
     <RootNamespace>consolecasino</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -127,15 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Development Files\blackjack.h" />
-    <ClInclude Include="Development Files\utilities.h" />
-    <ClInclude Include="fiveCardPoker.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Development Files\blackjack.cpp" />
-    <ClCompile Include="Development Files\main.cpp" />
-    <ClCompile Include="Development Files\utilities.cpp" />
-    <ClCompile Include="fiveCardPoker.cpp" />
+    <ClCompile Include="console-casino.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -3,12 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Folder Name="/Solution Items/">
-    <File Path="Development Files/blackjack.cpp" />
-    <File Path="Development Files/blackjack.h" />
-    <File Path="Development Files/main.cpp" />
-    <File Path="Development Files/utilities.cpp" />
-    <File Path="Development Files/utilities.h" />
-  </Folder>
-  <Project Path="console-casino.vcxproj" Id="839c6126-2d9a-4a48-9afc-3ac228ce92e6" />
+  <Project Path="console-casino.vcxproj" />
 </Solution>
