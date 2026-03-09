@@ -7,6 +7,7 @@
 
 // Header Inclusions
 #include "utilities.h"
+#include "blackjack.h"
 
 // Main Function
 int main(int argc, char** argv)
@@ -31,6 +32,11 @@ int main(int argc, char** argv)
         {
             case 1:
             {
+                clearConsole();
+                do
+                {
+                    blackjackNewGame();
+                } while (playerBet > 0 && playerChips > 0);
                 break;
             }
             case 2:

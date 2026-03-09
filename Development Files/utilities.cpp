@@ -18,7 +18,7 @@ int currentCard = 0;
  */
 void clearConsole()
 {
-    std::cout << "\n\n\n\n\n";
+    std::cout << "\n\n\n\n\n\n\n\n\n\n";
 }
 
 /**
@@ -40,6 +40,10 @@ int getPlayerBet()
     return playerBet;
 }
 
+/**
+ Generates a new card for card games
+ @return - The numerical value of the new card.
+ */
 int generateNewCard()
 {
     int card = rand() % 10 + 1;
