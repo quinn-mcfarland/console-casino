@@ -127,7 +127,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="console-casino.cpp" />
+    <ClCompile Include="Development Files\blackjack.cpp" />
+    <ClCompile Include="Development Files\fiveCardPoker.cpp" />
+    <ClCompile Include="Development Files\main.cpp" />
+    <ClCompile Include="Development Files\utilities.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Development Files\blackjack.h" />
+    <ClInclude Include="Development Files\fiveCardPoker.h" />
+    <ClInclude Include="Development Files\utilities.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -15,8 +15,28 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="console-casino.cpp">
+    <ClCompile Include="Development Files\blackjack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Development Files\fiveCardPoker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Development Files\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Development Files\utilities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Development Files\blackjack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Development Files\fiveCardPoker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Development Files\utilities.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

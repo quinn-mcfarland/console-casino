@@ -1,37 +1,12 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\lilmc\\OneDrive\\Desktop\\console-casino\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{10CCA09A-43AE-4508-A401-99E88D074CAF}|console-casino.vcxproj|C:\\Users\\lilmc\\OneDrive\\Desktop\\console-casino\\console-casino.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{10CCA09A-43AE-4508-A401-99E88D074CAF}|console-casino.vcxproj|solutionrelative:console-casino.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    }
-  ],
+  "WorkspaceRootPath": "C:\\Users\\lilmc\\OneDrive\\Documents\\Repos\\console-casino\\",
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "console-casino.cpp",
-              "DocumentMoniker": "C:\\Users\\lilmc\\OneDrive\\Desktop\\console-casino\\console-casino.cpp",
-              "RelativeDocumentMoniker": "console-casino.cpp",
-              "ToolTip": "C:\\Users\\lilmc\\OneDrive\\Desktop\\console-casino\\console-casino.cpp",
-              "RelativeToolTip": "console-casino.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-03-09T04:31:44.855Z",
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
+      "DocumentGroups": []
     }
   ]
 }
