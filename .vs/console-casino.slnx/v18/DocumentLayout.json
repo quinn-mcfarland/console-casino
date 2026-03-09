@@ -3,12 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\lilmc\\OneDrive\\Documents\\Repos\\console-casino\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lilmc\\OneDrive\\Documents\\Repos\\console-casino\\Development Files\\blackjack.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Development Files\\blackjack.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{C9C10228-390D-493F-8AA9-191B0667CDAE}|Solution Items{C9C10228-390D-493F-8AA9-191B0667CDAE}|C:\\Users\\lilmc\\OneDrive\\Documents\\Repos\\console-casino\\Development Files\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C9C10228-390D-493F-8AA9-191B0667CDAE}|Solution Items{C9C10228-390D-493F-8AA9-191B0667CDAE}|solutionrelative:Development Files\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lilmc\\OneDrive\\Documents\\Repos\\console-casino\\Development Files\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Development Files\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{839C6126-2D9A-4A48-9AFC-3AC228CE92E6}|console-casino.vcxproj|C:\\Users\\lilmc\\OneDrive\\Documents\\Repos\\console-casino\\Development Files\\utilities.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{839C6126-2D9A-4A48-9AFC-3AC228CE92E6}|console-casino.vcxproj|solutionrelative:Development Files\\utilities.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{839C6126-2D9A-4A48-9AFC-3AC228CE92E6}|console-casino.vcxproj|C:\\Users\\lilmc\\OneDrive\\Documents\\Repos\\console-casino\\Development Files\\blackjack.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{839C6126-2D9A-4A48-9AFC-3AC228CE92E6}|console-casino.vcxproj|solutionrelative:Development Files\\blackjack.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{839C6126-2D9A-4A48-9AFC-3AC228CE92E6}|console-casino.vcxproj|C:\\Users\\lilmc\\OneDrive\\Documents\\Repos\\console-casino\\Development Files\\blackjack.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{839C6126-2D9A-4A48-9AFC-3AC228CE92E6}|console-casino.vcxproj|solutionrelative:Development Files\\blackjack.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,32 +26,58 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
+              "Title": "utilities.cpp",
+              "DocumentMoniker": "C:\\Users\\lilmc\\OneDrive\\Documents\\Repos\\console-casino\\Development Files\\utilities.cpp",
+              "RelativeDocumentMoniker": "Development Files\\utilities.cpp",
+              "ToolTip": "C:\\Users\\lilmc\\OneDrive\\Documents\\Repos\\console-casino\\Development Files\\utilities.cpp",
+              "RelativeToolTip": "Development Files\\utilities.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-03-09T04:00:01.702Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "blackjack.h",
+              "DocumentMoniker": "C:\\Users\\lilmc\\OneDrive\\Documents\\Repos\\console-casino\\Development Files\\blackjack.h",
+              "RelativeDocumentMoniker": "Development Files\\blackjack.h",
+              "ToolTip": "C:\\Users\\lilmc\\OneDrive\\Documents\\Repos\\console-casino\\Development Files\\blackjack.h",
+              "RelativeToolTip": "Development Files\\blackjack.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-09T03:54:40.433Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "blackjack.cpp",
               "DocumentMoniker": "C:\\Users\\lilmc\\OneDrive\\Documents\\Repos\\console-casino\\Development Files\\blackjack.cpp",
               "RelativeDocumentMoniker": "Development Files\\blackjack.cpp",
               "ToolTip": "C:\\Users\\lilmc\\OneDrive\\Documents\\Repos\\console-casino\\Development Files\\blackjack.cpp",
               "RelativeToolTip": "Development Files\\blackjack.cpp",
-              "ViewState": "AgIAAJkAAAAAAAAAAAAAALIAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAE0AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-03-09T03:20:12.282Z",
+              "WhenOpened": "2026-03-09T03:52:23.985Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "main.cpp",
               "DocumentMoniker": "C:\\Users\\lilmc\\OneDrive\\Documents\\Repos\\console-casino\\Development Files\\main.cpp",
               "RelativeDocumentMoniker": "Development Files\\main.cpp",
               "ToolTip": "C:\\Users\\lilmc\\OneDrive\\Documents\\Repos\\console-casino\\Development Files\\main.cpp",
               "RelativeToolTip": "Development Files\\main.cpp",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAAADYAAAAnAAAAAAAAAA==",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAACgAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-03-09T03:19:36.085Z",
+              "WhenOpened": "2026-03-09T03:50:24.476Z",
               "EditorCaption": ""
             }
           ]

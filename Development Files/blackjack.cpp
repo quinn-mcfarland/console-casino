@@ -42,57 +42,39 @@ void blackjackNewGame()
     {
         playerChips -= playerBet; // Subtracts player's current bet from their bank.
         clearConsole();
-            
+
         // Deal player 2 cards
         for (int i = 0; i < 2; i++)
         {
             currentCard = generateNewCard();
             playerScore += currentCard;
-            
+
             // Checker for if player was dealt an ace, giving them a soft score if true
             if ((currentCard == 1 && !playerStand) || (playerSoft > 0 && playerSoft < 21))
             {
                 playerSoft = playerScore + 10;
             }
         }
-    }
-            
-    // Check for if player was dealt a blackjack
-    if (playerScore == 21)
-    {
-        playerStand = true;
-        playerHasBlackjack = true;
-    }
-            
-    // Dealer gets first face-up card
-    dealerScore = generateNewCard();
-            
-    // Check for if dealer was dealt an ace, giving the dealer a soft score if true.
-    if(dealerScore == 1)
-    {
-        dealerSoft = dealerScore + 10;
-    }
-    
-    // Display current scores before going to the player's turn
-    
-    // Display player's soft score, if they have one, else their hard score.
-    if (playerSoft <= 21 && playerSoft > 0)
-    {
-        std::cout << "You have " << playerScore << "/" << playerSoft << std::endl;
-    }
-    else
-    {
-        std::cout << "You have " << playerScore << std::endl;
-    }
-    
-    // Display dealer's soft score, if they have one, else their hard score.
-    if (dealerScore == 1 || dealerSoft > 0)
-    {
-        std::cout << "Dealer has " << dealerScore << "/" << dealerSoft << std::endl;
-    }
-    else
-    {
-        std::cout << "Dealer has " << dealerScore << std::endl;
+
+
+        // Check for if player was dealt a blackjack
+        if (playerScore == 21)
+        {
+            playerStand = true;
+            playerHasBlackjack = true;
+        }
+
+        // Dealer gets first face-up card
+        dealerScore = generateNewCard();
+
+        // Check for if dealer was dealt an ace, giving the dealer a soft score if true.
+        if (dealerScore == 1)
+        {
+            dealerSoft = dealerScore + 10;
+        }
+
+        // Display current scores before going to the player's turn
+        blackjackDisplayScores();
     }
 }
 
@@ -120,7 +102,7 @@ void blackjackPlayersTurn()
         case 2:
             playerStand = true;
             break;
-        case 3:
+        default:
             std::cout << "Invalid input." << std::endl;
             break;
     }
@@ -130,6 +112,9 @@ void blackjackPlayersTurn()
     {
         playerSoft = playerScore + 10;
     }
+
+    // Display current scores
+    blackjackDisplayScores();
 }
 
 /**
@@ -176,4 +161,60 @@ void blackjackScoring()
     }
 
     // Score the round
+    if (playerHasBlackjack && playerScore > dealerScore)
+    {
+        std::cout << "Blackjack!" << std::endl;
+        playerChips += (playerBet * 3.5);
+    }
+    else if (playerScore > 21)
+    {
+        std::cout << "You bust!" << std::endl;
+    }
+    else if (dealerScore > 21)
+    {
+        std::cout << "Dealer bust!" << std::endl;
+        playerChips += (playerBet * 2);
+    }
+    else if (dealerScore > playerScore)
+    {
+        std::cout << "Dealer wins!" << std::endl;
+    }
+    else if (playerScore > dealerScore)
+    {
+        std::cout << "You win!" << std::endl;
+        playerChips += (playerBet * 2);
+    }
+    else
+    {
+        std::cout << "Push. Nobody wins." << std::endl;
+        playerChips += playerBet;
+    }
+
+    // Display final score
+    std::cout << "Final Scores:" << std::endl
+        << "Player: " << playerScore << std::endl
+        << "Dealer: " << dealerScore << std::endl;
+}
+
+void blackjackDisplayScores()
+{
+    // Display Player's soft score, if they have one.
+    if (playerSoft <= 21 && playerSoft > 0)
+    {
+        std::cout << "You have " << playerScore << "/" << playerSoft << std::endl;
+    }
+    else
+    {
+        std::cout << "You have " << playerScore << std::endl;
+    }
+
+    // Display Dealer's soft Score, if they have one.
+    if (dealerSoft <= 21 && dealerSoft > 0)
+    {
+        std::cout << "Dealer has " << dealerScore << "/" << dealerSoft << std::endl;
+    }
+    else
+    {
+        std::cout << "Dealer has " << dealerScore << std::endl;
+    }
 }

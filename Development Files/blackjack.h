@@ -6,6 +6,7 @@ void blackjackNewGame();
 void blackjackPlayersTurn();
 void blackjackDealersTurn();
 void blackjackScoring();
+void blackjackDisplayScores();
 
 // Variable Declarations
 extern int playerScore;

@@ -1,0 +1,3 @@
+﻿  blackjack.cpp
+C:\Users\lilmc\OneDrive\Documents\Repos\console-casino\Development Files\blackjack.cpp(167,35): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+  console-casino.vcxproj -> C:\Users\lilmc\OneDrive\Documents\Repos\console-casino\x64\Debug\console-casino.exe

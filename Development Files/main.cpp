@@ -38,21 +38,25 @@ int main(int argc, char** argv)
                     // Start a new game for blackjack
                     blackjackNewGame();
                     
-                    // Process the player's turn if they did not get dealt a blackjack or bust during a current turn.
-                    while (!playerStand && playerScore < 21)
+                    if (playerBet > 0)
                     {
-                        blackjackPlayersTurn();
-                        clearConsole();
-                    }
-                    
-                    // Process the dealer's turn
-                    while (playerStand && !dealerStand)
-                    {
-                        blackjackDealersTurn();
-                    }
+                        // Process the player's turn if they did not get dealt a blackjack or bust during a current turn.
+                        while (!playerStand && playerScore < 21)
+                        {
+                            blackjackPlayersTurn();
+                            clearConsole();
+                        }
 
-                    // When all parties stand, score the round and pay out player for a win.
-                    blackjackScoring();
+                        // Process the dealer's turn
+                        while (playerStand && !dealerStand)
+                        {
+                            blackjackDealersTurn();
+                            clearConsole();
+                        }
+
+                        // When all parties stand, score the round and pay out player for a win.
+                        blackjackScoring();
+                    }
                 } while (playerBet > 0 && playerChips > 0);
                 break;
             }
