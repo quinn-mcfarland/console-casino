@@ -1,7 +1,0 @@
-<Solution>
-  <Configurations>
-    <Platform Name="x64" />
-    <Platform Name="x86" />
-  </Configurations>
-  <Project Path="console-casino.vcxproj" Id="10cca09a-43ae-4508-a401-99e88d074caf" />
-</Solution>
