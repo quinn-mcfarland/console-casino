@@ -1,3 +1,6 @@
+/* Blackjack Global Issue Tracker
+ * Issue #40: Blackjack Improvements */
+
 // Library Inclusions
 #include <cstdlib>
 #include <iostream>

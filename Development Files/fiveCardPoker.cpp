@@ -1,3 +1,6 @@
+/* Five Card Poker Issue Tracker
+ * Issue #34: Misaligned Display during exchange sequence */
+
 // Library Inclusions
 #include <cstdlib>
 #include <iostream>

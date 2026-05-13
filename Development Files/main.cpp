@@ -1,3 +1,10 @@
+/* Global Project Issue Tracker
+ * Issue #19: Roulette Implementation
+ * Issue #20: Craps Implementation
+ * Issue #21: Slots Implementaiton
+ * Issue #35: SDL Graphic Implementation
+ * Issues #42, #43, #44: Deployability and Stability Tests */
+
 //Library Inclusions
 #include <cstdlib> // Core library.
 #include <iostream> // Library to manage I/O streams
@@ -16,7 +23,7 @@ int main(int argc, char** argv)
     // Set up program variables
     std::string userInput;
     int menu = 0;// Main menu variable for switch case
-    srand((unsigned int)time(NULL)); // Seeds the RNG
+    srand((unsigned int)time(NULL)); // Seeds the RNG | Issue #30: Better Random Number Generator
     
     // Main Menu
     do
