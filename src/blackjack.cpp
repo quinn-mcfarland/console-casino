@@ -5,7 +5,6 @@
  */
 
 // Library Inclusions
-#include <cstdlib>
 #include <iostream>
 #include <string>
 
@@ -134,7 +133,7 @@ void blackjackDealersTurn()
         dealerStand = true;
     }
 
-    // Dealer will play only when the player has stood and while they aren't standing themself.
+    // Dealer will play only when the player has stood and is not bust, and the dealer itself has not stood or been dealt blackjack.
     while (playerStand && !dealerStand)
     {
         // Dealer will hit under 18 and when at or under a soft 17, else dealer will stand.

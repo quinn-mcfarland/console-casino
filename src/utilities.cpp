@@ -2,7 +2,6 @@
  * Issue #29: Card Deck Implementation */
 
 // Library Inclusions
-#include <cstdlib>
 #include <iostream>
 #include <string>
 

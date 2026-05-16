@@ -2,7 +2,6 @@
  * Issue #34: Misaligned Display during exchange sequence */
 
 // Library Inclusions
-#include <cstdlib>
 #include <iostream>
 #include <string>
 #include <iomanip>
@@ -30,10 +29,10 @@ void fiveCardPokerNewGame(std::array<int, 5>& handArray)
 	}
 
 	// Output the player's current hand
-	outputPokerHand(playerHand);
+	displayHand(playerHand);
 }
 
-void outputPokerHand(const std::array<int, 5>& handArray)
+void displayHand(const std::array<int, 5>& handArray)
 {
 	std::cout << "Current hand: ";
 	for (int i = 0; i < 5; i++)
@@ -43,12 +42,10 @@ void outputPokerHand(const std::array<int, 5>& handArray)
 	std::cout << std::endl;
 }
 
-void pokerExchange(std::array<int, 5>& handArray)
+void fiveCardPokerExchange(std::array<int, 5>& handArray)
 {
 	// Declare the variables for the exchange system
 	int pokerMenu;
-	int exchangeAmount;
-	int exchangeCard;
 
 	// Prompt the player for their exchange
 	std::cout << "1) Exchange" << std::endl
@@ -57,9 +54,11 @@ void pokerExchange(std::array<int, 5>& handArray)
 	std::cin >> pokerMenu;
 
 	// Switch case for the exchange system
-	switch (pokerMenu)
-	{
-		case 1:
+	if (pokerMenu == 1) {
+
+		int exchangeAmount;
+		int exchangeCard;
+
 			// Ask the player how many cards to exchange
 			do
 			{
@@ -68,27 +67,23 @@ void pokerExchange(std::array<int, 5>& handArray)
 			} while (exchangeAmount < 1 || exchangeAmount > 3);
 
 			// Output the hand in a way to make the exchange process easy
-			outputPokerHand(handArray);
+			displayHand(handArray);
 			std::cout << std::right << std::setw(24) << "^ ^ ^ ^ ^" << std::endl;
 			std::cout << std::right << std::setw(24) << "1 2 3 4 5" << std::endl;
 
 			// Generate a new card in the slot a card is exchanged with
-			for (int i = 0; i < exchangeAmount; i++)
-			{
+			for (int i = 0; i < exchangeAmount; i++) {
 				std::cout << "Enter the number of the card you'd like to exchange for card " << i + 1 << " :";
 				std::cin >> exchangeCard;
 				handArray[exchangeCard - 1] = generateNewCard();
 			}
-			break;
-		case 2:
-			break;
 	}
 
 	// Display the player's hand once more
-	outputPokerHand(handArray);
+	displayHand(handArray);
 }
 
-void pokerWinCheck(const std::array<int, 5>& handArray)
+void fiveCardPokerScoring(const std::array<int, 5>& handArray)
 {
 	// Initialize Win check variables
 	int fullHouseCheck = 0;

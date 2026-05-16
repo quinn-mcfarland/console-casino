@@ -1,17 +1,14 @@
 /* Global Project Issue Tracker
  * Issue #19: Roulette Implementation
  * Issue #20: Craps Implementation
- * Issue #21: Slots Implementaiton
+ * Issue #21: Slots Implementation
  * Issue #35: SDL Graphic Implementation
  * Issues #42, #43, #44: Deployability and Stability Tests */
 
 //Library Inclusions
-#include <cstdlib> // Core library.
 #include <iostream> // Library to manage I/O streams
 #include <iomanip> // Library to manage visuals for I/O data
-#include <ctime> // Library to manage seeding of PRNG
 #include <string> // Library for strings, manages basically all stringed output
-#include <array> // Library for arrays, manages poker hands
 
 // Header Inclusions
 #include "../include/utilities.h"
@@ -24,7 +21,7 @@ int main(int argc, char** argv)
     // Set up program variables
     std::string userInput;
     int menu = 0;// Main menu variable for switch case
-    srand((unsigned int)time(NULL)); // Seeds the RNG | Issue #30: Better Random Number Generator
+    srand(static_cast<unsigned int>(time(nullptr))); // Seeds the RNG | Issue #30: Better Random Number Generator
     
     // Main Menu
     do
@@ -73,7 +70,10 @@ int main(int argc, char** argv)
             {
                 clearConsole();
                 do {
-
+                    // Start a new game
+                    fiveCardPokerNewGame(playerHand);
+                    fiveCardPokerExchange(playerHand);
+                    fiveCardPokerScoring(playerHand);
                 } while (playerBet> 0 && playerChips > 0);
                 break;
             }
