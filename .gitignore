@@ -414,11 +414,11 @@ FodyWeavers.xsd
 *.msm
 *.msp
 
-### XCode ###
+### Xcode ###
 ## User Settings
 xcuserdata/
 
-## XCode 8 and earlier
+## Xcode 8 and earlier
 *.xcscmblueprint
 *.xccheckout
 
