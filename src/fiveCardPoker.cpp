@@ -139,7 +139,7 @@ void fiveCardPokerScoring()
 	if (fourOfAKind) {
 		playerChips += playerBet * 6;
 		std::cout << "4-of-a-Kind!" << std::endl;
-	} else if (pairOne == 1 && threeOfAKind) {
+	} else if (pairOne > 0 && threeOfAKind) {
 		playerChips += playerBet * 5;
 		std::cout << "Full House!" << std::endl;
 	} else if (threeOfAKind) {
