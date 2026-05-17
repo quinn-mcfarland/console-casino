@@ -19,7 +19,6 @@
 int main(int argc, char** argv)
 {
     // Set up program variables
-    std::string userInput;
     int menu = 0;// Main menu variable for switch case
     srand(static_cast<unsigned int>(time(nullptr))); // Seeds the RNG | Issue #30: Better Random Number Generator
     
@@ -38,43 +37,40 @@ int main(int argc, char** argv)
         {
             case 1:
             {
-                clearConsole();
-                do
-                {
-                    // Start a new game for blackjack
+                do {
+                    // Start a new blackjack game
                     blackjackNewGame();
-                    
-                    if (playerBet > 0)
-                    {
+
+                    if (playerBet == 0) {
+                        break;
+                    } else {
                         // Process the player's turn if they did not get dealt a blackjack or bust during a current turn.
-                        while (!playerStand && playerScore < 21)
-                        {
+                        while (!playerStand && playerScore < 21) {
                             blackjackPlayersTurn();
-                            clearConsole();
                         }
 
                         // Process the dealer's turn
-                        while (playerStand && !dealerStand)
-                        {
+                        while (playerStand && !dealerStand) {
                             blackjackDealersTurn();
-                            clearConsole();
                         }
 
                         // When all parties stand, score the round and pay out player for a win.
                         blackjackScoring();
                     }
-                } while (playerBet > 0 && playerChips > 0);
+                } while (playerBet != 0 && playerChips > 0);
                 break;
             }
             case 2:
             {
                 clearConsole();
+
                 do {
                     // Start a new game
                     fiveCardPokerNewGame(playerHand);
                     fiveCardPokerExchange(playerHand);
                     fiveCardPokerScoring(playerHand);
                 } while (playerBet> 0 && playerChips > 0);
+
                 break;
             }
             case 3:
@@ -87,6 +83,5 @@ int main(int argc, char** argv)
             }
         }
     } while(menu != 3); // Program will continuously run until user wishes to exit
-    
     return 0;
 }
