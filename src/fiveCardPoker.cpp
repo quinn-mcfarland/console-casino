@@ -8,7 +8,6 @@
 #include <string>
 #include <iomanip>
 #include <array>
-#include <vector>
 
 // Header Inclusions
 #include "../include/utilities.h"
