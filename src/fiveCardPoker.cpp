@@ -15,34 +15,33 @@
 std::array<int, 5> playerHand;
 
 // Function Definitions
-void fiveCardPokerNewGame(std::array<int, 5>& handArray)
+void fiveCardPokerNewGame()
 {
 	// Get player bet as is normal for all new games.
-	clearConsole();
-	showChips();
 	getPlayerBet();
 
-	// Assign player a hand of 5 new cards
-	for (int i = 0; i < 5; i++)
-	{
-		handArray[i] = generateNewCard();
-	}
+	if (playerBet != 0) {
+		// Assign player a hand of 5 new cards
+		for (int i = 0; i < 5; i++)
+		{
+			playerHand[i] = generateNewCard();
+		}
 
-	// Output the player's current hand
-	displayHand(playerHand);
+		// Output the player's current hand
+		displayHand();
+	}
 }
 
-void displayHand(const std::array<int, 5>& handArray)
+void displayHand()
 {
-	std::cout << "Current hand: ";
-	for (int i = 0; i < 5; i++)
-	{
-		std::cout << handArray[i] << " ";
+	std::cout << "Current Hand: " << std::endl;
+	for (int i = 0; i < 5; i++) {
+		std::cout << std::left << std::setw(2) << playerHand[i] << " ";
 	}
 	std::cout << std::endl;
 }
 
-void fiveCardPokerExchange(std::array<int, 5>& handArray)
+void fiveCardPokerExchange()
 {
 	// Declare the variables for the exchange system
 	int pokerMenu;
@@ -66,24 +65,32 @@ void fiveCardPokerExchange(std::array<int, 5>& handArray)
 				std::cin >> exchangeAmount;
 			} while (exchangeAmount < 1 || exchangeAmount > 3);
 
-			// Output the hand in a way to make the exchange process easy
-			displayHand(handArray);
-			std::cout << std::right << std::setw(24) << "^ ^ ^ ^ ^" << std::endl;
-			std::cout << std::right << std::setw(24) << "1 2 3 4 5" << std::endl;
+			// Output the hand in a way to make the exchange process readable
+			displayHand();
+			std::cout << std::left;
+			for (int i = 0; i < 5; i++) {
+				std::cout << std::setw(3) << "^ ";
+			}
+			std::cout << std::endl
+				<< std::setw(3) << "1 "
+				<< std::setw(3) << "2 "
+				<< std::setw(3) << "3 "
+				<< std::setw(3) << "4 "
+				<< std::setw(3) << "5 " << std::endl;
 
 			// Generate a new card in the slot a card is exchanged with
 			for (int i = 0; i < exchangeAmount; i++) {
 				std::cout << "Enter the number of the card you'd like to exchange for card " << i + 1 << " :";
 				std::cin >> exchangeCard;
-				handArray[exchangeCard - 1] = generateNewCard();
+				playerHand[exchangeCard - 1] = generateNewCard();
 			}
 	}
 
 	// Display the player's hand once more
-	displayHand(handArray);
+	displayHand();
 }
 
-void fiveCardPokerScoring(const std::array<int, 5>& handArray)
+void fiveCardPokerScoring()
 {
 	// Initialize Win check variables
 	int fullHouseCheck = 0;
@@ -98,7 +105,7 @@ void fiveCardPokerScoring(const std::array<int, 5>& handArray)
 		count = 1;
 		for (int j = i; j < 5; j++)
 		{
-			if (handArray[j] == handArray[i])
+			if (playerHand[j] == playerHand[i])
 			{
 				count++;
 			}

@@ -63,12 +63,18 @@ int main(int argc, char** argv)
             case 2:
             {
                 clearConsole();
-
                 do {
                     // Start a new game
-                    fiveCardPokerNewGame(playerHand);
-                    fiveCardPokerExchange(playerHand);
-                    fiveCardPokerScoring(playerHand);
+                    fiveCardPokerNewGame();
+                    if (playerBet == 0) {
+                        break;
+                    } else {
+                        // Process exchange sequence
+                        fiveCardPokerExchange();
+
+                        // Score the round
+                        fiveCardPokerScoring();
+                    }
                 } while (playerBet> 0 && playerChips > 0);
 
                 break;
