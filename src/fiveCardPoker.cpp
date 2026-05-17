@@ -8,6 +8,7 @@
 #include <string>
 #include <iomanip>
 #include <array>
+#include <vector>
 
 // Header Inclusions
 #include "../include/utilities.h"
@@ -102,75 +103,56 @@ void fiveCardPokerExchange()
 
 void fiveCardPokerScoring()
 {
-	// Initialize Win check variables
-	int fullHouseCheck = 0;
-	int twoPairCheck = 0;
-	int winID = 0;
+	// Initialize variables for win conditions
+	bool fourOfAKind = false;
+	bool threeOfAKind = false;
+	int pairOne = 0;
+	int pairTwo = 0;
 	int count = 0;
+	int currentlyCheckedCard = 0;
 
-	// Check the hand for win conditions
 	for (int i = 0; i < 5; i++) {
-		count = 0;
-		count++;
+		count = 1;
+		currentlyCheckedCard = playerHand[i];
+
+		// Check if the cards later in the array match the current card
 		for (int j = i; j < 5; j++) {
-			if (playerHand[j] == playerHand[i] && j != i) {
+			if (playerHand[j] == playerHand[i] && i != j) {
 				count++;
 			}
 		}
-		// Finalize Win Conditions
-		if (count == 4)
-		{
-			winID = 5;
-		}
-		if (count == 3)
-		{
-			fullHouseCheck++;
-			winID = 3;
-		}
-		if (count == 2)
-		{
-			twoPairCheck++;
-			fullHouseCheck++;
-			winID = 1;
-		}
-		if (fullHouseCheck == 2)
-		{
-			winID = 4;
-		}
-		if (twoPairCheck == 2)
-		{
-			winID = 2;
+
+		// Assign win conditions based on the count of matching cards
+		if (count == 4) {
+			fourOfAKind = true;
+		} else if (count == 3) {
+			threeOfAKind = true;
+		} else if (count == 2) {
+			if (pairOne > 0 && currentlyCheckedCard != pairOne) {
+				pairTwo = playerHand[i];
+			} else {
+				pairOne = playerHand[i];
+			}
 		}
 	}
 
-	// Display a win or loss message
-	if (winID == 5)
-	{
-		std::cout << "4-of-a-Kind!" << std::endl;
+	// Check currently assigned win conditions and assign payout on a hierarchy system.
+	if (fourOfAKind) {
 		playerChips += playerBet * 6;
-	}
-	else if (winID == 4)
-	{
-		std::cout << "Full House!" << std::endl;
+		std::cout << "4-of-a-Kind!" << std::endl;
+	} else if (pairOne == 1 && threeOfAKind) {
 		playerChips += playerBet * 5;
-	}
-	else if (winID == 3)
-	{
-		std::cout << "3-of-a-Kind!" << std::endl;
+		std::cout << "Full House!" << std::endl;
+	} else if (threeOfAKind) {
 		playerChips += playerBet * 4;
-	}
-	else if (winID == 2)
-	{
-		std::cout << "Two Pair!" << std::endl;
+		std::cout << "3-of-a-Kind!" << std::endl;
+	} else if (pairOne > 0 && pairTwo > 0) {
 		playerChips += playerBet * 3;
-	}
-	else if (winID == 1)
-	{
-		std::cout << "Pair!" << std::endl;
+		std::cout << "Two Pair!" << std::endl;
+	} else if (pairOne > 0) {
 		playerChips += playerBet * 2;
-	}
-	else
-	{
-		std::cout << "You lose" << std::endl;
+		std::cout << "Pair!" << std::endl;
+	} else {
+		std::cout << "You Lose." << std::endl;
 	}
 }
