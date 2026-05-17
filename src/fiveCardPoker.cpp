@@ -1,5 +1,7 @@
 /* Five Card Poker Issue Tracker
- * Issue #34: Misaligned Display during exchange sequence */
+ * Issue #47, Exchange value validation
+ * Issue #48, Win Check Optimization
+ */
 
 // Library Inclusions
 #include <iostream>
@@ -63,6 +65,9 @@ void fiveCardPokerExchange()
 			{
 				std::cout << "How many cards to exchange (1 - 3): ";
 				std::cin >> exchangeAmount;
+				if (exchangeAmount < 1 || exchangeAmount > 3) {
+					std::cout << "Invalid amount, please try again." << std::endl;
+				}
 			} while (exchangeAmount < 1 || exchangeAmount > 3);
 
 			// Output the hand in a way to make the exchange process readable
@@ -80,8 +85,13 @@ void fiveCardPokerExchange()
 
 			// Generate a new card in the slot a card is exchanged with
 			for (int i = 0; i < exchangeAmount; i++) {
-				std::cout << "Enter the number of the card you'd like to exchange for card " << i + 1 << " :";
-				std::cin >> exchangeCard;
+				do {
+					std::cout << "Enter the number of the card you'd like to exchange for card " << i + 1 << " :";
+					std::cin >> exchangeCard;
+					if (exchangeCard < 1 || exchangeCard > 5) {
+						std::cout << "Invalid card number, please try again." << std::endl;
+					}
+				} while (exchangeCard < 1 || exchangeCard > 5);
 				playerHand[exchangeCard - 1] = generateNewCard();
 			}
 	}
@@ -97,48 +107,40 @@ void fiveCardPokerScoring()
 	int twoPairCheck = 0;
 	int winID = 0;
 	int count = 0;
-	int highCount = 0;
 
 	// Check the hand for win conditions
-	for (int i = 0; i < 4; i++)
-	{
-		count = 1;
-		for (int j = i; j < 5; j++)
-		{
-			if (playerHand[j] == playerHand[i])
-			{
+	for (int i = 0; i < 5; i++) {
+		count = 0;
+		count++;
+		for (int j = i; j < 5; j++) {
+			if (playerHand[j] == playerHand[i] && j != i) {
 				count++;
 			}
 		}
-		if (count > highCount)
+		// Finalize Win Conditions
+		if (count == 4)
 		{
-			highCount = count;
+			winID = 5;
 		}
-	}
-
-	// Finalize Win Conditions
-	if (count == 4)
-	{
-		winID = 5;
-	}
-	if (count == 3)
-	{
-		fullHouseCheck++;
-		winID = 3;
-	}
-	if (count == 2)
-	{
-		twoPairCheck++;
-		fullHouseCheck++;
-		winID = 1;
-	}
-	if (fullHouseCheck == 2)
-	{
-		winID = 4;
-	}
-	if (twoPairCheck == 2)
-	{
-		winID = 2;
+		if (count == 3)
+		{
+			fullHouseCheck++;
+			winID = 3;
+		}
+		if (count == 2)
+		{
+			twoPairCheck++;
+			fullHouseCheck++;
+			winID = 1;
+		}
+		if (fullHouseCheck == 2)
+		{
+			winID = 4;
+		}
+		if (twoPairCheck == 2)
+		{
+			winID = 2;
+		}
 	}
 
 	// Display a win or loss message
