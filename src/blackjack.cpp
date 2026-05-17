@@ -28,6 +28,7 @@ bool playerHasBlackjack = false;
 void blackjackNewGame()
 {
     // Reinitialize variables
+    playerBet = 0;
     playerScore = 0;
     dealerScore = 0;
     playerSoft = 0;
@@ -35,19 +36,13 @@ void blackjackNewGame()
     playerStand = false;
     dealerStand = false;
     playerHasBlackjack = false;
-    
+
     // Get Bet
-    showChips();
-    do {
-        playerBet = getPlayerBet();
-    } while (playerBet < 0 || playerBet > playerChips);
-        
+    getPlayerBet();
+
     // Set Table for new Game
     if (playerBet != 0)
     {
-        playerChips -= playerBet; // Subtracts player's current bet from their bank.
-        clearConsole();
-
         // Deal player 2 cards
         for (int i = 0; i < 2; i++)
         {
@@ -61,9 +56,8 @@ void blackjackNewGame()
             }
         }
 
-
         // Check for if player was dealt a blackjack
-        if (playerScore == 21)
+        if (playerSoft == 21)
         {
             playerStand = true;
             playerHasBlackjack = true;
@@ -166,10 +160,10 @@ void blackjackScoring()
     }
 
     // Score the round
-    if (playerHasBlackjack && playerScore > dealerScore)
+    if (playerHasBlackjack && playerScore != dealerScore)
     {
         std::cout << "Blackjack!" << std::endl;
-        playerChips += (playerBet * 3.5);
+        playerChips += (playerBet + (playerBet * 1.5));
     }
     else if (playerScore > 21)
     {
@@ -195,7 +189,7 @@ void blackjackScoring()
         playerChips += playerBet;
     }
 
-    // Display final score
+    // Display final score, reset player bet, and show money
     std::cout << "Final Scores:" << std::endl
         << "Player: " << playerScore << std::endl
         << "Dealer: " << dealerScore << std::endl;

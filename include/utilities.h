@@ -4,7 +4,7 @@
 // Function Prototypes
 void clearConsole();
 void showChips();
-int getPlayerBet();
+void getPlayerBet();
 int generateNewCard();
 
 // Variable Declarations

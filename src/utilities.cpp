@@ -32,14 +32,23 @@ void showChips()
 }
 
 /**
- Gets the players current bet.
- @return - The player's current bet.
+ Gets the players current bet and automatically subtracts it
  */
-int getPlayerBet()
+void getPlayerBet()
 {
-    std::cout << "Place your bet (Bet 0 to exit): ";
-    std::cin >> playerBet;
-    return playerBet;
+    showChips();
+    do {
+        std::cout << "Place your bet (Bet 0 to exit): ";
+        std::cin >> playerBet;
+
+        if (playerBet < 0 || playerBet > playerChips) {
+            std::cout << "Invalid amount, please try again." << std::endl;
+        }
+    } while (playerBet < 0 || playerBet > playerChips);
+
+    // When player's bet is valid, subtract the amount and clear the screen
+    playerChips -= playerBet;
+    clearConsole();
 }
 
 /**

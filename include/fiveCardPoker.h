@@ -8,9 +8,9 @@
 extern std::array<int, 5> playerHand;
 
 // Function Prototypes
-void fiveCardPokerNewGame(std::array<int, 5>& handArray);
-void displayHand(const std::array<int, 5>& handArray);
-void fiveCardPokerExchange(std::array<int,5>& handArray);
-void fiveCardPokerScoring(const std::array<int, 5>& handArray);
+void fiveCardPokerNewGame();
+void displayHand();
+void fiveCardPokerExchange();
+void fiveCardPokerScoring();
 
 #endif // !FIVECARDPOKER_H
