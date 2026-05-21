@@ -1,9 +1,3 @@
-/* Blackjack Global Issue Tracker
- * Issue #40: Blackjack Improvements
- * - Subissue 40.1: Insurance Bets
- * - Subissue 40.2: Combine scoring and display score functions
- */
-
 // Library Inclusions
 #include <iostream>
 #include <string>

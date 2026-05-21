@@ -1,5 +1,7 @@
 #ifndef BLACKJACK_H
 #define BLACKJACK_H
+// Library Inclusions
+#include <vector>
 
 // Function Prototypes
 void blackjackNewGame();

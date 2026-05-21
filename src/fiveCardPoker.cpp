@@ -1,8 +1,3 @@
-/* Five Card Poker Issue Tracker
- * Issue #47, Exchange value validation
- * Issue #48, Win Check Optimization
- */
-
 // Library Inclusions
 #include <iostream>
 #include <string>

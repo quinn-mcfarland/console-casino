@@ -1,10 +1,3 @@
-/* Global Project Issue Tracker
- * Issue #19: Roulette Implementation
- * Issue #20: Craps Implementation
- * Issue #21: Slots Implementation
- * Issue #35: SDL Graphic Implementation
- * Issues #42, #43, #44: Deployability and Stability Tests */
-
 //Library Inclusions
 #include <iostream> // Library to manage I/O streams
 #include <iomanip> // Library to manage visuals for I/O data
@@ -14,13 +7,14 @@
 #include "../include/utilities.h"
 #include "../include/blackjack.h"
 #include "../include/fiveCardPoker.h"
+#include "../include/cards.h"
 
 // Main Function
 int main(int argc, char** argv)
 {
     // Set up program variables
     int menu = 0;// Main menu variable for switch case
-    srand(static_cast<unsigned int>(time(nullptr))); // Seeds the RNG | Issue #30: Better Random Number Generator
+    srand(static_cast<unsigned int>(time(nullptr))); // Seeds the RNG
     
     // Main Menu
     do
@@ -29,6 +23,7 @@ int main(int argc, char** argv)
         std::cout << "1. Blackjack" << std::endl;
         std::cout << "2. Five Card Poker" << std::endl;
         std::cout << "3. Exit" << std::endl;
+        std::cout << "4. Card Deck Test (Debug)" << std::endl;
         std::cout << "Make a selection: ";
         std::cin >> menu;
         
@@ -81,6 +76,12 @@ int main(int argc, char** argv)
             }
             case 3:
             {
+                break;
+            }
+            case 4:
+            {
+                Deck deck;
+                deck.printDeck();
                 break;
             }
             default:

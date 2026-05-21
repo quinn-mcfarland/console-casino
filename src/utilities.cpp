@@ -1,6 +1,3 @@
-/* Utility Issue Tracker
- * Issue #29: Card Deck Implementation */
-
 // Library Inclusions
 #include <iostream>
 #include <string>
