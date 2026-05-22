@@ -22,7 +22,6 @@ public:
     // Other Member Function
     void shuffle();
     void deal();
-    void draw();
     void displayDeck();
 };
 

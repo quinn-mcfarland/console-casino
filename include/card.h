@@ -13,7 +13,6 @@ public:
     // Constructors and Destructor
     card();
     card(std::string s, std::string r);
-    ~card();
     // Accessors
     std::string getSuit() { return suit; }
     std::string getRank() { return rank; }
