@@ -1,9 +1,0 @@
-#ifndef CONSOLECASINO_DEALER_H
-#define CONSOLECASINO_DEALER_H
-
-
-class dealer {
-};
-
-
-#endif //CONSOLECASINO_DEALER_H
