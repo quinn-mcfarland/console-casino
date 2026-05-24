@@ -3,8 +3,8 @@
 #include "player.h"
 
 player::player() {
-    *money = 1000;
-    betAmount = nullptr;
+    money = new int(1000);
+    betAmount = new int(0);
     hand = new std::vector<card*>();
 }
 
@@ -27,6 +27,6 @@ std::ostream& operator<<(std::ostream& os, const player& p) {
 }
 
 std::istream& operator>>(std::istream& is, player& p) {
-    is >> p.money >> p.betAmount >> p.hand;
+    is >> *p.money >> *p.betAmount;
     return is;
 }
