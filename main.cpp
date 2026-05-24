@@ -27,6 +27,19 @@ int main (int argc, char *argv[]) {
             << "3) Exit" << std::endl
             << "Please make a selection: ";
         std::cin >> mainMenu;
+
+        // Switch case for main menu selection
+        switch (mainMenu) {
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            default:
+                std::cout << "Invalid selection, please try again." << std::endl;
+                break;
+        }
     } while (mainMenu != 3);
 
     return 0;
