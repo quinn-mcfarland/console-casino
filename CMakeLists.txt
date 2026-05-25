@@ -6,8 +6,5 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 add_executable(consolecasino
         main.cpp
-        player.cpp
-        card.cpp
-        CardDeck.cpp
-        utilities.cpp
+        Player.cpp
 )
