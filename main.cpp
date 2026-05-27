@@ -58,29 +58,6 @@ int main() {
         switch (mainMenu) {
         case 1:
             do {
-                blackjackNewGame();
-                if (user.getBetAmount() != 0) {
-                    bool playerHasInsurance;
-                    playerHasInsurance = blackjackInsurance();
-                    if (dealer.allHands[0][0].getValue() == 1 && dealer.allHands[0][1].getValue() == 10
-                        || dealer.allHands[0][0].getValue() == 10 && dealer.allHands[0][1].getValue() == 1) {
-                        if (playerHasInsurance) {
-                            std::cout << "Your insurance bet wins" << std::endl;
-                            user.setMoney(user.getMoney() + (user.getInsuranceBetAmount() * 2));
-                        } else {
-                            std::cout << "Your insurance bet lost" << std::endl;
-                        }
-                        blackjackScoring();
-                    } else if (user.allHands[0][0].getValue() == 1 && user.allHands[0][1].getValue() == 10
-                               || user.allHands[0][0].getValue() == 10 && user.allHands[0][1].getValue() == 1) {
-                        std::cout << "Blackjack!" << std::endl;
-                        blackjackScoring();
-                    } else{
-                        blackjackPlayersTurn();
-                        blackjackDealersTurn();
-                        blackjackScoring();
-                    }
-                }
                 do {
                     std::cout << "Play again? (1 for yes, 0 for no): ";
                     std::cin >> blackjackContinue;
@@ -130,6 +107,12 @@ void shuffleDeck() {
     cardDeckIndex = 0;
 }
 
+void dealOneCard(Player player) {
+    player.allHands[0].emplace_back(Card(cardDeck[cardDeckIndex].getSuit(),
+                cardDeck[cardDeckIndex].getRank(), cardDeck[cardDeckIndex].getValue()));
+    cardDeckIndex++;
+}
+
 // Blackjack Functions
 void blackjackNewGame() {
     // Clear console and get player's bet
@@ -143,13 +126,8 @@ void blackjackNewGame() {
 
         // Deal two cards to both player and dealer
         for (int i = 0; i < 2; i++) {
-            user.allHands[0].emplace_back(Card(cardDeck[cardDeckIndex].getSuit(),
-                cardDeck[cardDeckIndex].getRank(), cardDeck[cardDeckIndex].getValue()));
-            cardDeckIndex++;
-
-            dealer.allHands[0].emplace_back(Card(cardDeck[cardDeckIndex].getSuit(),
-                cardDeck[cardDeckIndex].getRank(), cardDeck[cardDeckIndex].getValue()));
-            cardDeckIndex++;
+            dealOneCard(user);
+            dealOneCard(dealer);
         }
 
         // Display player's hand and face-up dealer card
@@ -236,9 +214,7 @@ void blackjackPlayersTurn() {
             // Game Loop Switch Case
             switch (blackjackMenu) {
             case 1:
-                user.allHands[i].emplace_back(Card(cardDeck[cardDeckIndex].getSuit(),
-                    cardDeck[cardDeckIndex].getRank(), cardDeck[cardDeckIndex].getValue()));
-                cardDeckIndex++;
+                dealOneCard(user);
                 currentHandScore += user.allHands[i][user.allHands[i].size() - 1].getValue();
                 if (user.allHands[i][user.allHands[i].size() -1].getValue() == 1 || currentHandSoft > 0) {
                     currentHandSoft = currentHandScore + 10;
@@ -253,9 +229,8 @@ void blackjackPlayersTurn() {
                     user.setBetAmount(user.getBetAmount() * 2);
 
                     // Deal One Card
-                    user.allHands[i].emplace_back(Card(cardDeck[cardDeckIndex].getSuit(),
-                        cardDeck[cardDeckIndex].getRank(), cardDeck[cardDeckIndex].getValue()));
-                    cardDeckIndex++;
+                    dealOneCard(user);
+                    currentHandScore += user.allHands[i][user.allHands[i].size() - 1].getValue();
 
                     // End player's turn
                     blackjackMenu = 2;
@@ -275,9 +250,7 @@ void blackjackPlayersTurn() {
                     user.allHands[i].pop_back();
 
                     for (int j = 0; j < user.allHands.size(); j++) {
-                        user.allHands[j].emplace_back(Card(cardDeck[cardDeckIndex].getSuit(),
-                            cardDeck[cardDeckIndex].getRank(), cardDeck[cardDeckIndex].getValue()));
-                        cardDeckIndex++;
+                        dealOneCard(user);
                     }
 
                     // Recalculate current hand score for the split hand
@@ -315,9 +288,7 @@ void blackjackDealersTurn() {
 
     while (handScore < 18 && handSoft <= 17) {
         std::cout << "Dealer's score: " << handScore << std::endl;
-        dealer.allHands[0].emplace_back(Card(cardDeck[cardDeckIndex].getSuit(),
-        cardDeck[cardDeckIndex].getRank(), cardDeck[cardDeckIndex].getValue()));
-        cardDeckIndex++;
+        dealOneCard(dealer);
 
         handScore += dealer.allHands[0][dealer.allHands[0].size() - 1].getValue();
         if (dealer.allHands[0][dealer.allHands[0].size() -1].getValue() == 1) {
