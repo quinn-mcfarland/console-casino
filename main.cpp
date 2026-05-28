@@ -26,7 +26,7 @@ int cardDeckIndex = 0;
 inline void clearConsole() { std::cout << "\n\n\n\n\n\n\n\n\n\n";}
 void createCardDeck();
 void shuffleDeck();
-void dealOneCard(Player &player, std::vector<Card> &currentHand);
+void dealOneCard(Player &player, int currentHand);
 
 // Blackjack Functions
 void blackjackNewGame();
@@ -145,8 +145,8 @@ void shuffleDeck() {
     cardDeckIndex = 0;
 }
 
-void dealOneCard(Player &player) {
-    player.allHands[0].emplace_back(Card(cardDeck[cardDeckIndex].getSuit(),
+void dealOneCard(Player &player, int currentHand) {
+    player.allHands[currentHand].emplace_back(Card(cardDeck[cardDeckIndex].getSuit(),
     cardDeck[cardDeckIndex].getRank(), cardDeck[cardDeckIndex].getValue()));
     cardDeckIndex++;
 }
@@ -164,8 +164,8 @@ void blackjackNewGame() {
 
         // Deal two cards to both player and dealer
         for (int i = 0; i < 2; i++) {
-            dealOneCard(user);
-            dealOneCard(dealer);
+            dealOneCard(user, 0);
+            dealOneCard(dealer, 0);
         }
 
         // Display player's hand and face-up dealer card
@@ -205,6 +205,7 @@ bool blackjackInsurance() {
 void blackjackPlayersTurn() {
     int blackjackMenu = 0;
     int currentHandScore = 0;
+    int currentHandSoft = 0;
 
     // Play all of user's hands
     for (int i = 0; i < user.allHands.size(); i++) {
@@ -212,7 +213,7 @@ void blackjackPlayersTurn() {
             clearConsole();
 
             currentHandScore = 0;
-            int currentHandSoft = 0;
+            currentHandSoft = 0;
 
             for (int j = 0; j < user.allHands[i].size(); j++) {
                 currentHandScore += user.allHands[i][j].getValue();
@@ -252,7 +253,7 @@ void blackjackPlayersTurn() {
                 if (cardDeck[cardDeckIndex].getValue() == 1 || currentHandSoft > 0) {
                     currentHandSoft = currentHandScore + 10;
                 }
-                dealOneCard(user);
+                dealOneCard(user, i);
                 break;
             case 2:
                 break;
@@ -267,7 +268,7 @@ void blackjackPlayersTurn() {
                     if (cardDeck[cardDeckIndex].getValue() == 1 || currentHandSoft > 0) {
                         currentHandSoft = currentHandScore + 10;
                     }
-                    dealOneCard(user);
+                    dealOneCard(user, i);
 
                     // End the turn
                     blackjackMenu = 2;
@@ -276,14 +277,14 @@ void blackjackPlayersTurn() {
                 }
                 break;
             case 4:
-                if (user.allHands[0][0].getValue() == user.allHands[0][1].getValue()) {
+                if (user.allHands[i][0].getValue() == user.allHands[i][1].getValue()) {
                     // Collect the bet
                     user.setMoney(user.getMoney() - user.getBetAmount());
 
                     // Split the hand into two
                     user.allHands.emplace_back(std::vector<Card>());
-                    user.allHands[1].emplace_back(user.allHands[0][1]);
-                    user.allHands[0].pop_back();
+                    user.allHands[i + 1].emplace_back(user.allHands[0][1]);
+                    user.allHands[i].pop_back();
 
                     // Deal a new card to each hand
                     for (int j = 0; j < user.allHands.size(); j++) {
@@ -299,7 +300,7 @@ void blackjackPlayersTurn() {
                 std::cout << "Invalid input. Please try again." << std::endl;
                 break;
             }
-        } while (blackjackMenu != 2 && currentHandScore < 21);
+        } while (blackjackMenu != 2 && (currentHandScore <= 21 && currentHandSoft <= 21));
     }
 }
 
@@ -317,7 +318,7 @@ void blackjackDealersTurn() {
     }
 
     while (handScore < 17 && handSoft <= 17) {
-        dealOneCard(dealer);
+        dealOneCard(dealer, 0);
 
         handScore += dealer.allHands[0][dealer.allHands[0].size() - 1].getValue();
         if (dealer.allHands[0][dealer.allHands[0].size() -1].getValue() == 1) {
@@ -340,7 +341,7 @@ void blackjackScoring() {
     // First the dealer's hand
     for (int i = 0; i < dealer.allHands[0].size(); i++) {
         dealersHandScore += dealer.allHands[0][i].getValue();
-        if (dealer.allHands[0][i].getValue() == 1) {
+        if (dealer.allHands[0][i].getValue() == 1 > dealersHandSoft > 0) {
             dealersHandSoft = dealersHandScore + 10;
         }
     }
@@ -360,7 +361,7 @@ void blackjackScoring() {
         usersCurrentHandScore = 0;
         for (int j = 0; j < user.allHands[i].size(); j++) {
             usersCurrentHandScore += user.allHands[i][j].getValue();
-            if (user.allHands[i][j].getValue() == 1) {
+            if (user.allHands[i][j].getValue() == 1 || usersCurrentHandSoft > 0) {
                 usersCurrentHandSoft = usersCurrentHandScore + 10;
             }
         }
