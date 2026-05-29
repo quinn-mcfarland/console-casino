@@ -344,7 +344,7 @@ void blackjackScoring() {
     // First the dealer's hand
     for (int i = 0; i < dealer.allHands[0].size(); i++) {
         dealersHandScore += dealer.allHands[0][i].getValue();
-        if (dealer.allHands[0][i].getValue() == 1 > dealersHandSoft > 0) {
+        if (dealer.allHands[0][i].getValue() == 1 || dealersHandSoft > 0) {
             dealersHandSoft = dealersHandScore + 10;
         }
     }
@@ -408,5 +408,5 @@ void fiveCardPokerNewGame() {
         user.getPlayerBet();
 
         // Deal the user 5 cards if their bet is valid
-    } while (pokerContinue == 1 && user.getBetAmount() > );
+    } while (pokerContinue == 1 && user.getBetAmount() > user.getMoney());
 }
