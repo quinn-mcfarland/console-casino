@@ -36,6 +36,9 @@ void blackjackDealersTurn();
 void blackjackScoring();
 
 // Five Card Poker Functions
+void fiveCardPokerNewGame();
+void fiveCardPokerExchange();
+void fiveCardPokerScoring();
 
 /* Main Function */
 int main() {
@@ -397,3 +400,13 @@ void blackjackScoring() {
     dealer.allHands.clear();
 }
 // Five Card Poker Functions
+void fiveCardPokerNewGame() {
+    // Local variables
+    int pokerContinue;
+    do {
+        // Get Players bet
+        user.getPlayerBet();
+
+        // Deal the user 5 cards if their bet is valid
+    } while (pokerContinue == 1 && user.getBetAmount() > );
+}
