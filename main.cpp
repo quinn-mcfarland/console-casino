@@ -108,6 +108,15 @@ int main() {
                 }
             } while (blackjackContinue != 0);
             break;
+        case 2:
+            // Start a new game
+            fiveCardPokerNewGame();
+
+            // Ask player if they would like to exchange cards
+            fiveCardPokerExchange();
+
+            // Score the hand
+            fiveCardPokerScoring();
         case 3:
             break;
         default:
@@ -402,11 +411,83 @@ void blackjackScoring() {
 // Five Card Poker Functions
 void fiveCardPokerNewGame() {
     // Local variables
-    int pokerContinue;
+
+    // Clear the console
+    clearConsole();
+
+    // Game Loop
     do {
         // Get Players bet
         user.getPlayerBet();
+        clearConsole();
+    } while (user.getBetAmount() < 0 || user.getBetAmount() > user.getMoney());
 
-        // Deal the user 5 cards if their bet is valid
-    } while (pokerContinue == 1 && user.getBetAmount() > user.getMoney());
+    // If bet is valid, deal 5 cards to the user and display them
+    if (user.getBetAmount() > 0) {
+        // Create a new hand and deal 5 cards
+        user.allHands.emplace_back(std::vector<Card>());
+        for (int i = 0; i < 5; i++) {
+            dealOneCard(user, 0);
+        }
+        // Display the user's hand
+        std::cout << "Your hand: " << std::endl;
+        for (int i = 0; i < user.allHands[0].size(); i++) {
+            std::cout << user.allHands[0][i].getRank() << " of " << user.allHands[0][i].getSuit() << std::endl;
+        }
+    }
+}
+
+void fiveCardPokerExchange() {
+    // Local Variables
+    int exchangeMenu;
+
+    // Ask the user if they would like to exchange cards
+    do {
+        std::cout << "Would you like to exchange cards? (1 for yes, 0 for no): ";
+        std::cin >> exchangeMenu;
+        if (exchangeMenu < 0 || exchangeMenu > 1) {
+            std::cout << "Invalid input. Please try again." << std::endl;
+        }
+    } while (exchangeMenu < 0 || exchangeMenu > 1);
+
+    if (exchangeMenu == 1) {
+        exchangeMenu = 0;
+        int exchangeAmount;
+
+        // Ask the user how many cards they would like to exchange
+        do {
+            std::cout << "Enter the number of cards you'd like to exchange (1-3): ";
+            std::cin >> exchangeAmount;
+            if (exchangeAmount < 1 || exchangeAmount > 3) {
+                std::cout << "Invalid input. Please try again." << std::endl;
+            }
+        } while (exchangeAmount < 1 || exchangeAmount > 3);
+
+        // Clear the console
+        clearConsole();
+
+        // Display hand with user-friendly indices
+        std::cout << "Your hand: " << std::endl;
+        for (int i = 0; i < user.allHands[0].size(); i++) {
+            std::cout << i + 1 << ") " << user.allHands[0][i].getRank() <<
+                " of " << user.allHands[0][i].getSuit() << std::endl;
+        }
+
+        // Get indices of cards to exchange
+        for (int i = 0; i < exchangeAmount; i++) {
+            // Individual card prompt
+            do {
+                std::cout << "Enter the number of the card you'd like to exchange for card " << i + 1 << ": ";
+                std::cin >> exchangeMenu;
+                if (exchangeMenu < 1 || exchangeMenu > 5) {
+                    std::cout << "Invalid input. Please try again." << std::endl;
+                }
+            } while (exchangeMenu < 1 || exchangeMenu > 5);
+
+            // Exchange the card
+            user.allHands[0].at(exchangeMenu - 1) = Card(cardDeck[cardDeckIndex].getSuit(),
+                cardDeck[cardDeckIndex].getRank(), cardDeck[cardDeckIndex].getValue());
+            cardDeckIndex++;
+        }
+    }
 }

@@ -6,11 +6,11 @@
 
 class Player {
 public:
-  [[nodiscard]] inline int getBetAmount() const { return betAmount; }
-  [[nodiscard]] inline int getMoney() const { return money; }
-  [[nodiscard]] inline int getInsuranceBetAmount() const { return insuranceBetAmount; }
-  inline void setMoney(int newMoney) { money = newMoney; }
-  inline void setBetAmount(int newBetAmount) { betAmount = newBetAmount;}
+  int getBetAmount() const { return betAmount; }
+  int getMoney() const { return money; }
+  int getInsuranceBetAmount() const { return insuranceBetAmount; }
+  void setMoney(int newMoney) { money = newMoney; }
+  void setBetAmount(int newBetAmount) { betAmount = newBetAmount;}
   void getPlayerBet();
   void getInsuranceBet();
   std::vector<std::vector<Card>> allHands = {};
