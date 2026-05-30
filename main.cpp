@@ -491,3 +491,59 @@ void fiveCardPokerExchange() {
         }
     }
 }
+
+void fiveCardPokerScoring() {
+    // Local Variables
+    bool fourOfAKind = false;
+    bool threeOfAKind = false;
+    int pairOne = 0;
+    int pairTwo = 0;
+    int count = 0;
+    Card currentlyCheckedCard;
+
+    // Iterate through the hand and check for win conditions
+    for (int i = 0; i < 5; i++) {
+        count = 1;
+        currentlyCheckedCard = user.allHands[0][i];
+
+        // Check if cards later in the hand match the current card
+        for (int j = i; j < 5; j++) {
+            if (user.allHands[0][j].getRank() == currentlyCheckedCard.getRank() && i != j) {
+                count++;
+            }
+        }
+
+        // Assign win conditions based on the number of matching cards
+        if (count == 4) {
+            fourOfAKind = true;
+        } else if (count == 3) {
+            threeOfAKind = true;
+        } else if (count == 2) {
+            if (pairOne > 0 && currentlyCheckedCard.getValue() != pairOne) {
+                pairTwo = currentlyCheckedCard.getValue();
+            } else {
+                pairOne = currentlyCheckedCard.getValue();
+            }
+        }
+    }
+
+    // Assign win conditions on a hierarchy system
+    if (fourOfAKind) {
+        std::cout << "4 of a kind!" << std::endl;
+        user.setMoney(user.getMoney() + (user.getBetAmount() * 6));
+    } else if (pairOne > 0 && threeOfAKind) {
+        std::cout << "Full House!" << std::endl;
+        user.setMoney(user.getMoney() + (user.getBetAmount() * 5));
+    } else if (threeOfAKind) {
+        std::cout << "3 of a kind!" << std::endl;
+        user.setMoney(user.getMoney() + (user.getBetAmount() * 4));
+    } else if (pairOne > 0 && pairTwo > 0) {
+        std::cout << "Two Pair!" << std::endl;
+        user.setMoney(user.getMoney() + (user.getBetAmount() * 3));
+    } else if (pairOne > 0) {
+        std::cout << "Pair!" << std::endl;
+        user.setMoney(user.getMoney() + (user.getBetAmount() * 2));
+    } else {
+        std::cout << "You lose." << std::endl;
+    }
+}
