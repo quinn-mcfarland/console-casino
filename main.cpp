@@ -51,8 +51,11 @@ int main() {
     // Game Loop
     do {
         // Menu Prompt
-        printf("1) Blackjack\n2) Five Card Poker\n3) Exit\nPlease make a selection: ");
-        scanf("%d", &mainMenu);
+        std::cout << "1) Blackjack" << std::endl
+        << "2) Five Card Poker" << std::endl
+        << "3) Exit" << std::endl
+        << "Please make a selection: ";
+        std::cin >> mainMenu;
 
         // Switch case for game menu
         switch (mainMenu) {
@@ -69,10 +72,10 @@ int main() {
                     if (playerHasInsurance) {
                         if ((dealer.allHands[0][0].getValue() == 1 && dealer.allHands[0][1].getValue() == 10) ||
                             (dealer.allHands[0][0].getValue() == 10 && dealer.allHands[0][1].getValue() == 1)) {
-                            printf("Your insurance bet wins!\n");
+                            std::cout << "Your insurance bet wins!" << std::endl;
                             blackjackScoring();
                             } else {
-                                printf("Your insurance bet loses.\n");
+                                std::cout << "Your insurance bet loses." << std::endl;
                             }
                     }
 
@@ -96,19 +99,28 @@ int main() {
 
                     // Then prompt the player to play again
                     do {
-                        printf("Play again? (1 for yes, 0 for no)\n");
-                        scanf("%d", &blackjackContinue);
+                        std::cout << "Play again? (1 for yes, 0 for no): ";
+                        std::cin >> blackjackContinue;
                         if (blackjackContinue < 0 || blackjackContinue > 1) {
-                            printf("Invalid input. Please try again.\n");
+                            std::cout << "Invalid input. Please try again." << std::endl;
                         }
                     } while (blackjackContinue < 0 || blackjackContinue > 1);
                 }
             } while (blackjackContinue != 0);
             break;
+        case 2:
+            // Start a new game
+            fiveCardPokerNewGame();
+
+            // Ask player if they would like to exchange cards
+            fiveCardPokerExchange();
+
+            // Score the hand
+            fiveCardPokerScoring();
         case 3:
             break;
         default:
-            printf("Invalid input. Please try again\n");
+            std::cout << "Invalid input. Please try again." << std::endl;
             break;
         }
     } while (mainMenu != 3);
@@ -120,14 +132,16 @@ int main() {
 // Utility Functions
 void createCardDeck() {
     // Local Variables
-    std::string suits[] = {"clubs", "diamonds", "hearts", "spades"};
-    std::string ranks[] = { "ace", "2", "3", "4", "5", "6",
-        "7", "8", "9", "10", "jack", "queen", "king" };
+    std::array<std::string, 4> suits = {"clubs", "diamonds", "hearts",
+        "spades"};
+    std::array<std::string, 13> ranks = { "ace", "2", "3", "4",
+        "5", "6", "7", "8", "9", "10", "jack", "queen",
+        "king" };
     int deckIndex = 0;
 
     // Create Card Deck
-    for (int i = 0; i < 4; i++) {
-        for (int j = 0; j < 13; j++) {
+    for (int i = 0; i < suits.size(); i++) {
+        for (int j = 0; j < ranks.size(); j++) {
             if (j >= 10) {
                 cardDeck[deckIndex] = Card(suits[i], ranks[j], 10);
             } else {
@@ -178,10 +192,10 @@ bool blackjackInsurance() {
 
     if (dealer.allHands[0][0].getValue() == 1  || dealer.allHands[0][0].getValue() == 10) {
         do {
-            printf("Insurance? (1 for yes, 0 for no)\n");
-            scanf("%d", &insuranceCheck);
+            std::cout << "Insurance? (1 for yes, 0 for no): ";
+            std::cin >> insuranceCheck;
             if (insuranceCheck < 0 || insuranceCheck > 1) {
-                printf("Invalid Input. Please try again.\n");
+                std::cout << "Invalid input. Please try again." << std::endl;
             }
         } while (insuranceCheck != 0 && insuranceCheck != 1);
 
@@ -223,24 +237,26 @@ void blackjackPlayersTurn() {
             for (int j = 0; j < user.allHands[i].size(); j++) {
                 std::cout << user.allHands[i][j].getRank() << " ";
             }
-            printf("\nHand Total: %d", &currentHandScore);
+            std::cout << std::endl << "Hand total: " << currentHandScore;
             if (currentHandSoft > 0 && currentHandSoft <= 21) {
-                printf(" / Soft %d", currentHandSoft);
+                std::cout << " / Soft " << currentHandSoft;
             }
-            printf("\n1) Hit \n2) Stand\n");
+            std::cout << std::endl
+                << "1) Hit" << std::endl
+                << "2) Stand" << std::endl;
 
             // Prompt for a double down if available
             if (user.allHands[i].size() == 2) {
-                printf("3) Double\n");
+                std::cout << "3) Double" << std::endl;
             }
 
             // Prompt for split if available
             if (user.allHands[i][0].getValue() == user.allHands[i][1].getValue()) {
-                printf("4) Split\n");
+                std::cout << "4) Split" << std::endl;
             }
 
-            printf("Please make a selection: ");
-            scanf("%d", &blackjackMenu);
+            std::cout << "Please make a selection: ";
+            std::cin >> blackjackMenu;
 
             // Switch case for game loop
             switch (blackjackMenu) {
@@ -269,7 +285,7 @@ void blackjackPlayersTurn() {
                     // End the turn
                     blackjackMenu = 2;
                 } else {
-                    printf("Invalid Input. How'd you even get here?\n");
+                    std::cout << "Option unavailable. How'd you even get here?" << std::endl;
                 }
                 break;
             case 4:
@@ -289,11 +305,11 @@ void blackjackPlayersTurn() {
                         cardDeckIndex++;
                     }
                 } else {
-                    printf("Invalid Input. How'd you even get here?\n");
+                    std::cout << "Option unavailable. How'd you even get here?" << std::endl;
                 }
                 break;
             default:
-                printf("Invalid Input. Please try again.\n");
+                std::cout << "Invalid input. Please try again." << std::endl;
                 break;
             }
         } while (blackjackMenu != 2 && (currentHandScore <= 21 && currentHandSoft <= 21));
@@ -346,11 +362,11 @@ void blackjackScoring() {
     }
 
     // Display dealers hand
-    printf("Dealer's Hand:\n");
+    std::cout << "Dealer's hand: " << std::endl;
     for (int i = 0; i < dealer.allHands[0].size(); i++) {
         std::cout << dealer.allHands[0][i].getRank() << " ";
     }
-    printf("Total: %d", dealersHandScore, "\n");
+    std::cout << "Total: " << dealersHandScore << std::endl;
 
     // Then compare it to each of the user's hands and pay out accordingly
     for (int i = 0; i < user.allHands.size(); i++) {
@@ -366,23 +382,23 @@ void blackjackScoring() {
         }
 
         // Display players current hand
-        printf("Current Hand:\n");
+        std::cout << "Current hand: " << std::endl;
         for (int j = 0; j < user.allHands[i].size(); j++) {
             std::cout << user.allHands[i][j].getRank() << " ";
         }
-        printf("Total: %d", usersCurrentHandScore, "\n");
+        std::cout << "Total: " << usersCurrentHandScore << std::endl;
 
         // Calculate outcome
         if (user.allHands[i].size() == 2 && usersCurrentHandScore == 21) {
-            printf("Blackjack!\n");
+            std::cout << "Blackjack!" << std::endl;
             user.setMoney(user.getMoney() + (user.getBetAmount() * 2.5));
         } else if (usersCurrentHandScore > 21) {
-            printf("Bust. You lose.\n");
+            std::cout << "Bust! You lose." << std::endl;
         } else if (usersCurrentHandScore > dealersHandScore || dealersHandScore > 21) {
-            printf("You win!\n");
+            std::cout << "You win!" << std::endl;
             user.setMoney(user.getMoney() + (user.getBetAmount() * 2));
         } else if (usersCurrentHandScore == dealersHandScore) {
-            printf("Push.\n");
+            std::cout << "Push." << std::endl;
             user.setMoney(user.getMoney() + user.getBetAmount());
         }
     }
@@ -395,11 +411,139 @@ void blackjackScoring() {
 // Five Card Poker Functions
 void fiveCardPokerNewGame() {
     // Local variables
-    int pokerContinue;
+
+    // Clear the console
+    clearConsole();
+
+    // Game Loop
     do {
         // Get Players bet
         user.getPlayerBet();
+        clearConsole();
+    } while (user.getBetAmount() < 0 || user.getBetAmount() > user.getMoney());
 
-        // Deal the user 5 cards if their bet is valid
-    } while (pokerContinue == 1 && user.getBetAmount());
+    // If bet is valid, deal 5 cards to the user and display them
+    if (user.getBetAmount() > 0) {
+        // Create a new hand and deal 5 cards
+        user.allHands.emplace_back(std::vector<Card>());
+        for (int i = 0; i < 5; i++) {
+            dealOneCard(user, 0);
+        }
+        // Display the user's hand
+        std::cout << "Your hand: " << std::endl;
+        for (int i = 0; i < user.allHands[0].size(); i++) {
+            std::cout << user.allHands[0][i].getRank() << " of " << user.allHands[0][i].getSuit() << std::endl;
+        }
+    }
+}
+
+void fiveCardPokerExchange() {
+    // Local Variables
+    int exchangeMenu;
+
+    // Ask the user if they would like to exchange cards
+    do {
+        std::cout << "Would you like to exchange cards? (1 for yes, 0 for no): ";
+        std::cin >> exchangeMenu;
+        if (exchangeMenu < 0 || exchangeMenu > 1) {
+            std::cout << "Invalid input. Please try again." << std::endl;
+        }
+    } while (exchangeMenu < 0 || exchangeMenu > 1);
+
+    if (exchangeMenu == 1) {
+        exchangeMenu = 0;
+        int exchangeAmount;
+
+        // Ask the user how many cards they would like to exchange
+        do {
+            std::cout << "Enter the number of cards you'd like to exchange (1-3): ";
+            std::cin >> exchangeAmount;
+            if (exchangeAmount < 1 || exchangeAmount > 3) {
+                std::cout << "Invalid input. Please try again." << std::endl;
+            }
+        } while (exchangeAmount < 1 || exchangeAmount > 3);
+
+        // Clear the console
+        clearConsole();
+
+        // Display hand with user-friendly indices
+        std::cout << "Your hand: " << std::endl;
+        for (int i = 0; i < user.allHands[0].size(); i++) {
+            std::cout << i + 1 << ") " << user.allHands[0][i].getRank() <<
+                " of " << user.allHands[0][i].getSuit() << std::endl;
+        }
+
+        // Get indices of cards to exchange
+        for (int i = 0; i < exchangeAmount; i++) {
+            // Individual card prompt
+            do {
+                std::cout << "Enter the number of the card you'd like to exchange for card " << i + 1 << ": ";
+                std::cin >> exchangeMenu;
+                if (exchangeMenu < 1 || exchangeMenu > 5) {
+                    std::cout << "Invalid input. Please try again." << std::endl;
+                }
+            } while (exchangeMenu < 1 || exchangeMenu > 5);
+
+            // Exchange the card
+            user.allHands[0].at(exchangeMenu - 1) = Card(cardDeck[cardDeckIndex].getSuit(),
+                cardDeck[cardDeckIndex].getRank(), cardDeck[cardDeckIndex].getValue());
+            cardDeckIndex++;
+        }
+    }
+}
+
+void fiveCardPokerScoring() {
+    // Local Variables
+    bool fourOfAKind = false;
+    bool threeOfAKind = false;
+    int pairOne = 0;
+    int pairTwo = 0;
+    int count = 0;
+    Card currentlyCheckedCard;
+
+    // Iterate through the hand and check for win conditions
+    for (int i = 0; i < 5; i++) {
+        count = 1;
+        currentlyCheckedCard = user.allHands[0][i];
+
+        // Check if cards later in the hand match the current card
+        for (int j = i; j < 5; j++) {
+            if (user.allHands[0][j].getRank() == currentlyCheckedCard.getRank() && i != j) {
+                count++;
+            }
+        }
+
+        // Assign win conditions based on the number of matching cards
+        if (count == 4) {
+            fourOfAKind = true;
+        } else if (count == 3) {
+            threeOfAKind = true;
+        } else if (count == 2) {
+            if (pairOne > 0 && currentlyCheckedCard.getValue() != pairOne) {
+                pairTwo = currentlyCheckedCard.getValue();
+            } else {
+                pairOne = currentlyCheckedCard.getValue();
+            }
+        }
+    }
+
+    // Assign win conditions on a hierarchy system
+    if (fourOfAKind) {
+        std::cout << "4 of a kind!" << std::endl;
+        user.setMoney(user.getMoney() + (user.getBetAmount() * 6));
+    } else if (pairOne > 0 && threeOfAKind) {
+        std::cout << "Full House!" << std::endl;
+        user.setMoney(user.getMoney() + (user.getBetAmount() * 5));
+    } else if (threeOfAKind) {
+        std::cout << "3 of a kind!" << std::endl;
+        user.setMoney(user.getMoney() + (user.getBetAmount() * 4));
+    } else if (pairOne > 0 && pairTwo > 0) {
+        std::cout << "Two Pair!" << std::endl;
+        user.setMoney(user.getMoney() + (user.getBetAmount() * 3));
+    } else if (pairOne > 0) {
+        std::cout << "Pair!" << std::endl;
+        user.setMoney(user.getMoney() + (user.getBetAmount() * 2));
+    } else {
+        std::cout << "You lose." << std::endl;
+    }
 }
