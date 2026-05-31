@@ -1,4 +1,4 @@
-#include "Player.h"
+#include "../include/Player.hpp"
 #include <iostream>
 
 void Player::getPlayerBet() {
