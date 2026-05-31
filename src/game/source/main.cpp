@@ -5,8 +5,8 @@
 #include <random>
 
 // Class Includes
-#include "../Player.hpp"
-#include "../include/Card.hpp"
+#include "../../engine/source/Player.hpp"
+#include "../../engine/include/Card.hpp"
 
 /* Global Variables */
 // Objects

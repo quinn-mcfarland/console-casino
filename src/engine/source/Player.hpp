@@ -2,7 +2,7 @@
 #define CONSOLECASINO_PLAYER_H
 
 #include <vector>
-#include "Card.hpp"
+#include "../include/Card.hpp"
 
 class Player {
 public:
