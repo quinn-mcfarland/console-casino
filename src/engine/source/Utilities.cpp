@@ -1,26 +1,33 @@
-#include "../include/Utilities.hpp"
+#include "../include/Utilities.hpp" // Main header
 
-// Standard Library Includes
-#include <iostream>
-#include <random>
-#include <array>
-#include <string>
-#include <algorithm>
+#include <iostream> // Handles input and output stream
+#include <random> // Handles random number generator
+#include <array> // Handles array containers and members
+#include <string> // Handles string containers and members
+#include <algorithm> // Preconstructed free functions
 
-// User-Defined Includes
-#include "../include/Card.hpp"
+#include "../include/Card.hpp" // Handles Card objects and members
 
-// Constants
-std::random_device rd;
-std::mt19937 gen(rd());
+std::random_device rd; // RNG seed
+std::mt19937 gen(rd()); // RNG generator
 
-// Function Definitions
+/**
+ * @brief "Clears" the console by inserting 10 newline characters
+ */
 void clearConsole() {
     for (int i = 0; i < 10; i++) {
         std::cout << std::endl;
     }
 }
 
+/**
+ * @brief Populates the global card deck
+ *
+ * @param deck The deck to populate
+ * @param needsRanks Does the deck need Ranks?
+ * @param needsSuits Does the deck need Suits?
+ * @param needsValues Does the deck need Values?
+ */
 void createCardDeck(std::array<std::unique_ptr<Card>, 52> deck, bool needsRanks, bool needsSuits, bool needsValues) {
     // Local Variables
     std::array<std::string, 13> ranks = {};
@@ -56,10 +63,21 @@ void createCardDeck(std::array<std::unique_ptr<Card>, 52> deck, bool needsRanks,
     }
 }
 
+/**
+ * @brief Shuffles the global card deck
+ *
+ * @param deck The deck that needs shuffling
+ */
 void shuffleDeck(std::array<std::unique_ptr<Card>, 52> deck) {
     std::shuffle(deck.begin(), deck.end(), gen);
 }
 
+/**
+ * @brief Moves a card object from the card deck to a player's hand
+ *
+ * @param hand The hand needing dealt to
+ * @param deck The deck to deal from
+ */
 void dealOneCard(std::vector<std::unique_ptr<Card>> hand, std::array<std::unique_ptr<Card>, 52> deck) {
     hand.emplace_back(std::move(deck[0]));
 }
