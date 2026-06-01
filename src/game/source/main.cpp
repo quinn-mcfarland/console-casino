@@ -1,8 +1,13 @@
 /* Includes */
 // Standard Library Includes
 #include <iostream>
+#include <memory>
+#include <array>
 
 // User-Defined Includes
+#include "../../engine/include/Card.hpp"
+#include "../../engine/include/Player.hpp"
+#include "../../engine/include/Utilities.hpp"
 
 /* Global Constants */
 
@@ -13,6 +18,9 @@
 /* Main Function */
 int main() {
     // Object Creation
+    std::unique_ptr<Player> player = std::make_unique<Player>(1000, 0);
+    std::array<std::unique_ptr<Card>, 52> cardDeck;
+
     // Local Variables
     int mainMenu;
 

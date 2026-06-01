@@ -20,7 +20,7 @@ public:
 private:
     std::unique_ptr<int> money;
     std::unique_ptr<int> bet;
-    std::vector<std::vector<Card>> hands;
+    std::vector<std::vector<std::unique_ptr<Card>>> hands;
 
 };
 
