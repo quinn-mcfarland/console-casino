@@ -1,34 +1,30 @@
+/* Includes */
+// Primary Header Include
 #include "Player.hpp"
+
+// Standard Library Includes
+#include <memory>
 #include <iostream>
 
-void Player::getPlayerBet() {
-  std::cout << "You have $" << money << std::endl;
-
-  do {
-    std::cout << "Place your bet (enter 0 to exit): ";
-    std::cin >> betAmount;
-    if (betAmount < 0 || betAmount > money) {
-      std::cout << "Invalid bet amount. Please try again." << std::endl;
-    }
-  } while (betAmount < 0 || betAmount > money);
-
-  if (betAmount > 0) {
-    money -= betAmount;
-  }
+// User-Defined Includes
+Player::Player(int m, int b) {
+    // acquire resources at initialization
+    money = std::make_unique<int>(m);
+    bet = std::make_unique<int>(b);
 }
 
-void Player::getInsuranceBet() {
-  std::cout << "You have $" << money << std::endl;
+void Player::getBet() const {
+    do {
+        std::cout << "Place your bet (enter 0 to exit): ";
+        std::cin >> *bet;
+        if (*bet < 0 || *bet > *money) {
+            std::cout << "Invalid input. Please try again" << std::endl;
+        }
+    } while (*bet < 0 || *bet > *money);
 
-  do {
-    std::cout << "Place your bet (enter 0 to decline insurance): ";
-    std::cin >> insuranceBetAmount;
-    if (insuranceBetAmount < 0 || insuranceBetAmount> money) {
-      std::cout << "Invalid bet amount. Please try again." << std::endl;
-    }
-  } while (insuranceBetAmount < 0 || insuranceBetAmount > money);
+    *money -= *bet;
+}
 
-  if (insuranceBetAmount > 0) {
-    money -= insuranceBetAmount;
-  }
+void Player::payout(int p) const {
+    *money += p;
 }

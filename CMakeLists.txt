@@ -1,16 +1,15 @@
-# CMake Project Info
 cmake_minimum_required(VERSION 4.3)
-project(consolecasino)
+project(
+        consolecasino
+        VERSION 0.2.1
+        LANGUAGES CXX
+)
 
-# Language Standards
+# C++ standard enforcement
 set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Output directory for binaries
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-# External Dependencies
-
-# Source Subdirectories
 add_subdirectory(src/engine)
 add_subdirectory(src/game)

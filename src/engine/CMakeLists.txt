@@ -1,14 +1,8 @@
-# Engine Target
-add_library(game_engine STATIC)
+file(GLOB_RECURSE ENGINE_SOURCES "source/*.cpp")
 
-# Source targets
-target_sources(game_engine PRIVATE
-    source/player.cpp
+add_library(engine STATIC ${ENGINE_SOURCES})
+
+target_include_directories(engine
+        PUBLIC include/
+        PRIVATE source/
 )
-
-target_include_directories(game_engine
-    PUBLIC include/
-    PRIVATE source/
-)
-
-target_link_libraries(game_engine PRIVATE)

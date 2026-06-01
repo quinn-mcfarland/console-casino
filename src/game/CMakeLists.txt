@@ -1,5 +1,5 @@
-# Create game executable
-add_executable(consolecasino source/main.cpp)
+file(GLOB_RECURSE GAME_SOURCES "source/*.cpp")
 
-# Link engine library to game
-target_link_libraries(consolecasino PRIVATE game_engine)
+add_executable(consolecasino ${GAME_SOURCES})
+
+target_link_libraries(consolecasino PRIVATE engine)
