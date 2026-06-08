@@ -17,6 +17,7 @@ public:
     // Methods
     void getBet() const; // Collects a bet from the player
     void payout(int p) const; // Pays a player on their bet
+    [[nodiscard]] inline const std::vector<std::vector<std::unique_ptr<Card>>>& getHands() const { return hands; }
 private:
     std::unique_ptr<int> money; // The player's money
     std::unique_ptr<int> bet; // The player's current bet

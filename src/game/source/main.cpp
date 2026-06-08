@@ -1,9 +1,14 @@
+/* Includes */
+// Standard Library Includes
 #include <iostream> // Handles std::cout and std::cin statements
 #include <memory> // Handles std::unique_ptr and member methods
 #include <array> // Handles std::array and member methods
 
+// Class Includes
 #include "../../engine/include/Card.hpp" // Handles Card objects
 #include "../../engine/include/Player.hpp" // Handles Player objects
+
+// Misc. User-Defined Header Includes
 #include "../../engine/include/Utilities.hpp" // Global Purpose Free Functions
 #include "../../engine/include/Blackjack.hpp" // Blackjack Game Loop
 

@@ -82,3 +82,13 @@ void dealOneCard(std::vector<std::unique_ptr<Card>> hand, std::array<std::unique
     hand.emplace_back(std::move(deck[0]));
 }
 
+/**
+ * Displays a current Player object's hand
+ * @param hand The hand to be displayed
+ */
+void displayHand(std::vector<std::unique_ptr<Card>> hand) {
+    for (int i = 0; const auto& card : hand) {
+        std::cout << card->getValue() << " ";
+    }
+}
+
