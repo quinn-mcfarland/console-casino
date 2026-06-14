@@ -5,7 +5,7 @@
 #include <random>
 
 // Class Includes
-#include "../Player.hpp"
+#include "../include/Player.hpp"
 #include "../include/Card.hpp"
 
 /* Global Variables */
